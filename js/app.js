@@ -90,13 +90,29 @@ const family = [
 
 function saveData(){
 
+    // 今まで通りlocalStorageにも保存
     localStorage.setItem(
-
         "pochan-data",
-
         JSON.stringify(state)
-
     );
+
+    // Firebaseにも保存
+    if(window.firebaseDB){
+
+        const dataRef =
+            window.firebaseRef(
+                window.firebaseDB,
+                "pochan"
+            );
+
+        window.firebaseSet(
+            dataRef,
+            state
+        );
+
+        console.log("Firebaseに保存しました");
+
+    }
 
 }
 
