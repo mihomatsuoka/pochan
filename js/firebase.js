@@ -1,6 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import { getDatabase } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
-
+import {
+    getDatabase,
+    ref,
+    set,
+    onvalue
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyDY8gBLVlYP3V4QjVIN7QknguBYi-wApgw",
     authDomain: "potyan-8ff1f.firebaseapp.com",
@@ -17,3 +21,8 @@ const db = getDatabase(firebaseApp);
 
 console.log("Firebase 接続OK");
 console.log(db);
+
+window.firebaseDB = db;
+window.firebaseRef = ref;
+window.firebaseSet = set;
+window.firebaseonvalue = onvalue;
