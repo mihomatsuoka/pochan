@@ -1,13 +1,3 @@
-/* ==========================================
-   Project ぽちゃん
-   queue.js
-========================================== */
-
-
-/* ==========================================
-   待機列表示
-========================================== */
-
 function drawQueue(){
 
     if(state.queue.length === 0){
@@ -49,13 +39,11 @@ ${index + 1}
 }
 
 
-
 /* ==========================================
    順番待ち
 ========================================== */
 
 function joinQueue(){
-
 
     // 利用者未設定
     if(currentUser === ""){
@@ -69,14 +57,19 @@ function joinQueue(){
     }
 
 
-
     // 家族情報取得
     const user = family.find(
-
         person => person.name === currentUser
-
     );
 
+
+    if(!user){
+
+        alert("利用者情報が見つかりません。");
+
+        return;
+
+    }
 
 
     // 入浴中チェック
@@ -89,14 +82,10 @@ function joinQueue(){
     }
 
 
-
     // 待機中チェック
     const exists = state.queue.find(
-
         person => person.name === user.name
-
     );
-
 
 
     if(exists){
@@ -106,7 +95,6 @@ function joinQueue(){
         return;
 
     }
-
 
 
     document.body.insertAdjacentHTML(
@@ -119,22 +107,14 @@ function joinQueue(){
 
 <div class="sheet">
 
-
 <h2>
-
 ♨ 順番待ち
-
 </h2>
 
-
 <p>
-
 ${user.icon} ${user.name} を
 待機列へ追加しますか？
-
 </p>
-
-
 
 <button
 class="main-button"
@@ -144,8 +124,6 @@ onclick="addQueue()">
 
 </button>
 
-
-
 <button
 class="close-button"
 onclick="closeModal()">
@@ -153,7 +131,6 @@ onclick="closeModal()">
 キャンセル
 
 </button>
-
 
 </div>
 
@@ -166,16 +143,13 @@ onclick="closeModal()">
 }
 
 
-
 /* ==========================================
    モーダルを閉じる
 ========================================== */
 
 function closeModal(){
 
-
     const modal = document.getElementById("modal");
-
 
     if(modal){
 
@@ -183,9 +157,7 @@ function closeModal(){
 
     }
 
-
 }
-
 
 
 /* ==========================================
@@ -194,13 +166,18 @@ function closeModal(){
 
 function addQueue(){
 
-
     const user = family.find(
-
         person => person.name === currentUser
-
     );
 
+
+    if(!user){
+
+        alert("利用者情報が見つかりません。");
+
+        return;
+
+    }
 
 
     state.queue.push({
@@ -212,7 +189,6 @@ function addQueue(){
     });
 
 
-
     updateCrowded();
 
     saveData();
@@ -221,9 +197,7 @@ function addQueue(){
 
     drawHome();
 
-
 }
-
 
 
 /* ==========================================
@@ -232,7 +206,6 @@ function addQueue(){
 
 function startBath(){
 
-
     if(state.current.status !== "空き"){
 
         alert("現在入浴中です");
@@ -240,7 +213,6 @@ function startBath(){
         return;
 
     }
-
 
 
     if(state.queue.length === 0){
@@ -252,11 +224,11 @@ function startBath(){
     }
 
 
-
     const next = state.queue.shift();
 
 
-
+    // 入浴開始時刻
+    // Firebaseに保存しやすい数値で記録する
     state.current = {
 
         name:next.name,
@@ -265,10 +237,9 @@ function startBath(){
 
         status:"入浴中",
 
-        start:new Date()
+        start:Date.now()
 
     };
-console.log("入浴開始直後 start:", state.current.start);
 
 
     addHistory(
@@ -278,16 +249,13 @@ console.log("入浴開始直後 start:", state.current.start);
     );
 
 
-
     updateCrowded();
 
     saveData();
 
     drawHome();
 
-
 }
-
 
 
 /* ==========================================
@@ -303,15 +271,39 @@ function finishBath(){
     }
 
 
+    // 入浴開始時刻を取得
+    const start = state.current.start;
+
+
+    // startが存在しない場合
+    if(
+        typeof start !== "number" ||
+        !Number.isFinite(start)
+    ){
+
+        alert(
+            "入浴開始時刻を取得できませんでした。"
+        );
+
+        console.error(
+            "state.current.start が不正です:",
+            start
+        );
+
+        return;
+
+    }
+
+
     // 入浴時間を計算
     const bathTime = Math.floor(
 
-        (Date.now() - state.current.start) / 60000
+        (Date.now() - start) / 60000
 
     );
 
 
-    // 名前を先に保存
+    // 名前を保存
     const bathName = state.current.name;
 
 
@@ -323,8 +315,7 @@ function finishBath(){
     );
 
 
-    // 統計用データ
-    // recordsが存在しない場合も作成する
+    // recordsが存在しない場合
     if(!Array.isArray(state.records)){
 
         state.records = [];
@@ -332,13 +323,14 @@ function finishBath(){
     }
 
 
+    // 統計用データ
     state.records.push({
 
-　　　　date: getTodayString(),
+        date:getTodayString(),
 
-        name: bathName,
+        name:bathName,
 
-        minutes: bathTime
+        minutes:bathTime
 
     });
 
@@ -346,26 +338,21 @@ function finishBath(){
     // 空き状態に戻す
     state.current = {
 
-        name: "誰もいません",
+        name:"誰もいません",
 
-        icon: "🛁",
+        icon:"🛁",
 
-        status: "空き",
+        status:"空き",
 
-        start: null
+        start:null
 
     };
 
 
-    // 混雑状況を更新
     updateCrowded();
 
-
-    // データ保存
     saveData();
 
-
-    // ホーム画面を更新
     drawHome();
 
 }
