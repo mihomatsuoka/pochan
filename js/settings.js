@@ -205,13 +205,13 @@ function resetData(){
         return;
     }
 
-    // アプリデータ削除
+    // localStorageを削除
     localStorage.removeItem("pochan-data");
 
-    // 利用者削除
+    // 利用者を削除
     localStorage.removeItem("pochan-user");
 
-    // Firebaseのデータも削除
+    // Firebaseを削除
     if(window.firebaseDB){
 
         const dataRef = window.firebaseRef(
@@ -222,12 +222,36 @@ function resetData(){
         window.firebaseSet(
             dataRef,
             null
-        );
+        )
+        .then(() => {
 
-        console.log("Firebaseのデータを初期化しました");
+            console.log(
+                "Firebaseのデータを初期化しました"
+            );
+
+            alert("データを初期化しました。");
+
+            location.reload();
+
+        })
+        .catch((error) => {
+
+            console.error(
+                "Firebase初期化エラー:",
+                error
+            );
+
+            alert(
+                "Firebaseの初期化に失敗しました。"
+            );
+
+        });
+
+        return;
 
     }
 
+    // Firebaseが使えない場合
     alert("データを初期化しました。");
 
     location.reload();
