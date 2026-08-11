@@ -268,12 +268,7 @@ function startBath(){
         start:new Date()
 
     };
-console.log(
-    "入浴開始直後:",
-    state.current,
-    "start:",
-    state.current.start
-);
+console.log("入浴開始直後 start:", state.current.start);
 
 
     addHistory(
