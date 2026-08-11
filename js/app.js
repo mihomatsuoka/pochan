@@ -188,8 +188,6 @@ function loadData(){
                     firebaseData
                 );
 
-                }
-
                 // localStorageにも同期
                 localStorage.setItem(
                     "pochan-data",
