@@ -1,9 +1,9 @@
-/* ==========================================
-   Project ぽちゃん
-   main.js
-========================================== */
+window.addEventListener("load", async () => {
 
-window.addEventListener("load", () => {
+    // Firebaseの準備を待つ
+    if (window.firebaseReady) {
+        await window.firebaseReady;
+    }
 
     // データ読み込み
     loadData();
@@ -26,4 +26,4 @@ setInterval(() => {
 
     }
 
-},1000);
+}, 1000);
