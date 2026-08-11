@@ -33,7 +33,10 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 
 // Realtime Database
-const db = getDatabase(firebaseApp);
+const db = getDatabase(
+    firebaseApp,
+    "https://potyan-8ff1f-default-rtdb.asia-southeast1.firebasedatabase.app"
+);
 
 
 // 接続確認
@@ -41,11 +44,10 @@ console.log("Firebase 接続OK");
 console.log(db);
 
 
-// 他のJavaScriptから使えるようにする
+// 他のJSから使えるようにする
 window.firebaseDB = db;
-
 window.firebaseRef = ref;
-
 window.firebaseSet = set;
-
 window.firebaseOnValue = onValue;
+
+console.log("firebaseOnValue:", window.firebaseOnValue);
