@@ -115,7 +115,6 @@ function saveData(){
     }
 
 }
-
 /* ==========================================
    利用者保存
 ========================================== */
@@ -135,6 +134,7 @@ function saveCurrentUser(){
 /* ==========================================
    読み込み
 ========================================== */
+
 function loadData(){
 
     // Firebaseから読み込む
@@ -188,14 +188,6 @@ function loadData(){
                     firebaseData
                 );
 
-                // 日付データを復元
-                if(state.current.start){
-
-                    state.current.start =
-                        new Date(
-                            state.current.start
-                        );
-
                 }
 
                 // localStorageにも同期
@@ -240,14 +232,7 @@ function loadData(){
         obj
     );
 
-    if(state.current.start){
-
-        state.current.start =
-            new Date(
-                state.current.start
-            );
-
-    }
+  
 
 }
 /* ==========================================
@@ -284,13 +269,9 @@ function getBathTime(){
 
     }
 
-    const start =
-        new Date(state.current.start);
-
-    const diff = Math.floor(
-        (Date.now() - start.getTime()) / 60000
-    );
-
+   const diff = Math.floor(
+    (Date.now() - state.current.start) / 60000
+);
     if(isNaN(diff)){
 
         return "--";
