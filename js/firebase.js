@@ -3,7 +3,7 @@ import {
     getDatabase,
     ref,
     set,
-    onvalue
+    onValue
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyDY8gBLVlYP3V4QjVIN7QknguBYi-wApgw",
@@ -25,4 +25,4 @@ console.log(db);
 window.firebaseDB = db;
 window.firebaseRef = ref;
 window.firebaseSet = set;
-window.firebaseonvalue = onvalue;
+window.firebaseonValue = onValue;
