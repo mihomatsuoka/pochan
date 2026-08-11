@@ -135,29 +135,7 @@ function saveCurrentUser(){
 /* ==========================================
    読み込み
 ========================================== */
-
 function loadData(){
-
-    // まず今まで通りlocalStorageから読み込む
-    const data = localStorage.getItem(
-        "pochan-data"
-    );
-
-    if(data){
-
-        const obj = JSON.parse(data);
-
-        Object.assign(state,obj);
-
-        if(state.current.start){
-
-            state.current.start = new Date(
-                state.current.start
-            );
-
-        }
-
-    }
 
     // Firebaseから読み込む
     if(window.firebaseDB){
@@ -175,17 +153,42 @@ function loadData(){
                 const firebaseData =
                     snapshot.val();
 
+                // Firebaseにデータがない場合
                 if(!firebaseData){
 
-                    return;
+                    state.current = {
+                        name: "誰もいません",
+                        icon: "🛁",
+                        status: "空き",
+                        start: null
+                    };
 
+                    state.queue = [];
+                    state.history = [];
+                    state.records = [];
+                    state.crowded = "🟢 空いています";
+
+                    localStorage.removeItem(
+                        "pochan-data"
+                    );
+
+                    console.log(
+                        "Firebaseにデータがないため初期状態にしました"
+                    );
+
+                    updateCrowded();
+                    drawHome();
+
+                    return;
                 }
 
+                // Firebaseのデータを読み込む
                 Object.assign(
                     state,
                     firebaseData
                 );
 
+                // 日付データを復元
                 if(state.current.start){
 
                     state.current.start =
@@ -194,6 +197,12 @@ function loadData(){
                         );
 
                 }
+
+                // localStorageにも同期
+                localStorage.setItem(
+                    "pochan-data",
+                    JSON.stringify(state)
+                );
 
                 console.log(
                     "Firebaseからデータを読み込みました"
@@ -204,6 +213,39 @@ function loadData(){
 
             }
         );
+
+        return;
+    }
+
+
+    // Firebaseが使えない場合だけ
+    // localStorageから読み込む
+
+    const data =
+        localStorage.getItem(
+            "pochan-data"
+        );
+
+    if(!data){
+
+        return;
+
+    }
+
+    const obj =
+        JSON.parse(data);
+
+    Object.assign(
+        state,
+        obj
+    );
+
+    if(state.current.start){
+
+        state.current.start =
+            new Date(
+                state.current.start
+            );
 
     }
 
