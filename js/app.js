@@ -276,24 +276,30 @@ function now(){
 function getBathTime(){
 
     if(
-        state.current.status==="空き" ||
-        state.current.start===null
+        state.current.status === "空き" ||
+        state.current.start === null
     ){
 
         return "--";
 
     }
 
+    const start =
+        new Date(state.current.start);
+
     const diff = Math.floor(
-
-        (Date.now()-state.current.start)/60000
-
+        (Date.now() - start.getTime()) / 60000
     );
+
+    if(isNaN(diff)){
+
+        return "--";
+
+    }
 
     return diff + "分";
 
 }
-
 /* ==========================================
    混雑状況
 ========================================== */
