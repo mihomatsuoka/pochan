@@ -268,6 +268,7 @@ function startBath(){
         start:new Date()
 
     };
+   console.log("入浴開始直後:", state.current);
 
 
 
