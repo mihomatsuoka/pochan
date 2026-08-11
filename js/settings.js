@@ -198,15 +198,11 @@ function setCurrentUser(name){
 function resetData(){
 
     const ok = confirm(
-
         "本当にすべてのデータを初期化しますか？"
-
     );
 
     if(!ok){
-
         return;
-
     }
 
     // アプリデータ削除
@@ -214,6 +210,23 @@ function resetData(){
 
     // 利用者削除
     localStorage.removeItem("pochan-user");
+
+    // Firebaseのデータも削除
+    if(window.firebaseDB){
+
+        const dataRef = window.firebaseRef(
+            window.firebaseDB,
+            "pochan"
+        );
+
+        window.firebaseSet(
+            dataRef,
+            null
+        );
+
+        console.log("Firebaseのデータを初期化しました");
+
+    }
 
     alert("データを初期化しました。");
 
