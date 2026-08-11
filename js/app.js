@@ -138,34 +138,76 @@ function saveCurrentUser(){
 
 function loadData(){
 
+    // まず今まで通りlocalStorageから読み込む
     const data = localStorage.getItem(
-
         "pochan-data"
-
     );
 
-    if(!data){
+    if(data){
 
-        return;
+        const obj = JSON.parse(data);
+
+        Object.assign(state,obj);
+
+        if(state.current.start){
+
+            state.current.start = new Date(
+                state.current.start
+            );
+
+        }
 
     }
 
-    const obj = JSON.parse(data);
+    // Firebaseから読み込む
+    if(window.firebaseDB){
 
-    Object.assign(state,obj);
+        const dataRef =
+            window.firebaseRef(
+                window.firebaseDB,
+                "pochan"
+            );
 
-    if(state.current.start){
+        window.firebaseOnValue(
+            dataRef,
+            (snapshot) => {
 
-        state.current.start = new Date(
+                const firebaseData =
+                    snapshot.val();
 
-            state.current.start
+                if(!firebaseData){
 
+                    return;
+
+                }
+
+                Object.assign(
+                    state,
+                    firebaseData
+                );
+
+                if(state.current.start){
+
+                    state.current.start =
+                        new Date(
+                            state.current.start
+                        );
+
+                }
+
+                console.log(
+                    "Firebaseからデータを読み込みました"
+                );
+
+                updateCrowded();
+                drawHome();
+
+            }
         );
 
     }
 
 }
-
 /* ==========================================
    現在時刻
 ========================================== */
