@@ -118,6 +118,5 @@ function addHistory(text){
 
     );
 
-    saveData();
 
 }
