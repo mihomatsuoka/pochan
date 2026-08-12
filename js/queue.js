@@ -206,6 +206,7 @@ function addQueue(){
 
 function startBath(){
 
+    // お風呂が空いているか
     if(state.current.status !== "空き"){
 
         alert("現在入浴中です");
@@ -215,6 +216,17 @@ function startBath(){
     }
 
 
+    // この端末の利用者が設定されているか
+    if(currentUser === ""){
+
+        alert("設定画面で利用者を設定してください。");
+
+        return;
+
+    }
+
+
+    // 待機列があるか
     if(state.queue.length === 0){
 
         alert("待機中の人がいません");
@@ -224,20 +236,30 @@ function startBath(){
     }
 
 
+    // 先頭がこの端末の利用者か確認
+    if(state.queue[0].name !== currentUser){
+
+        alert("まだあなたの順番ではありません");
+
+        return;
+
+    }
+
+
+    // 先頭の人を取得
     const next = state.queue.shift();
 
 
-    // 入浴開始時刻
-    // Firebaseに保存しやすい数値で記録する
+    // 入浴開始
     state.current = {
 
-        name:next.name,
+        name: next.name,
 
-        icon:next.icon,
+        icon: next.icon,
 
-        status:"入浴中",
+        status: "入浴中",
 
-        start:Date.now()
+        start: Date.now()
 
     };
 
@@ -256,8 +278,6 @@ function startBath(){
     drawHome();
 
 }
-
-
 /* ==========================================
    入浴終了
 ========================================== */
