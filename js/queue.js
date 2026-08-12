@@ -280,8 +280,6 @@ function startBath(){
 
 function finishBath(){
 
-function finishBath(){
-
     if(state.current.status === "空き"){
 
         return;
