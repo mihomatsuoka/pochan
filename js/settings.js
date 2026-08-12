@@ -88,16 +88,26 @@ function updateCurrentUser(){
 
     }
 
-  if(user){
+if(user){
 
-    area.textContent = `${user.name}`;
+    area.textContent =
+        `${user.name}`;
+
+    const iconArea =
+        document.getElementById("current-icon");
+
+    if(iconArea){
+
+        iconArea.textContent =
+            `アイコン：${currentIcon || user.icon}`;
+
+    }
 
 }else{
 
     area.textContent = "未設定";
 
 }
-
     const user = family.find(
 
         person => person.name === currentUser
