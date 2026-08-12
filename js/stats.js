@@ -425,6 +425,65 @@ canvas.style.maxWidth = "100%";
 
     ];
 
+  // =========================
+    // 縦軸（入浴時間）＋グリッド線
+    // =========================
+
+    const yStep = 5;
+
+
+    for(
+        let value = 0;
+        value <= maxValue;
+        value += yStep
+    ){
+
+
+        const y =
+            170 -
+            (value / maxValue) * 130;
+
+
+        // グリッド線
+
+        ctx.strokeStyle =
+            "#E5E5E5";
+
+        ctx.lineWidth = 1;
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(30,y);
+
+        ctx.lineTo(graphRight,y);
+
+
+        ctx.stroke();
+
+
+        // 目盛りの数字
+
+        ctx.fillStyle =
+            "#666";
+
+
+        ctx.font =
+            "10px sans-serif";
+
+
+        ctx.fillText(
+
+            `${value}`,
+
+            5,
+
+            y + 3
+
+        );
+
+    }
 
     // =========================
     // 家族ごとに線を描く
@@ -522,66 +581,7 @@ canvas.style.maxWidth = "100%";
     });
 
 
-    // =========================
-    // 縦軸（入浴時間）＋グリッド線
-    // =========================
-
-    const yStep = 5;
-
-
-    for(
-        let value = 0;
-        value <= maxValue;
-        value += yStep
-    ){
-
-
-        const y =
-            170 -
-            (value / maxValue) * 130;
-
-
-        // グリッド線
-
-        ctx.strokeStyle =
-            "#E5E5E5";
-
-        ctx.lineWidth = 1;
-
-
-        ctx.beginPath();
-
-
-        ctx.moveTo(30,y);
-
-        ctx.lineTo(graphRight,y);
-
-
-        ctx.stroke();
-
-
-        // 目盛りの数字
-
-        ctx.fillStyle =
-            "#666";
-
-
-        ctx.font =
-            "10px sans-serif";
-
-
-        ctx.fillText(
-
-            `${value}`,
-
-            5,
-
-            y + 3
-
-        );
-
-    }
-
+  
 
     // =========================
     // 横軸（日付）を描く
