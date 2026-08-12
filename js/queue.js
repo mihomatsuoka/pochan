@@ -282,11 +282,27 @@ function startBath(){
 
 function finishBath(){
 
+function finishBath(){
+
     if(state.current.status === "空き"){
 
         return;
 
     }
+
+
+    // 入浴中の本人か確認
+    if(state.current.name !== currentUser){
+
+        alert("現在入浴中の本人ではありません");
+
+        return;
+
+    }
+
+
+    // 入浴開始時刻を取得
+    const start = state.current.start;
 
 
     // 入浴開始時刻を取得
