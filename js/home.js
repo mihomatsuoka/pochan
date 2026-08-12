@@ -135,10 +135,16 @@ function drawBottomMenu(){
    ボタン表示
 ========================================== */
 
+
 function drawButtons(){
 
     // お風呂が空いている
     if(state.current.status === "空き"){
+
+        // この端末の利用者が待機列にいるか確認
+        const myTurn = state.queue.some(
+            person => person.name === currentUser
+        );
 
         return `
 
@@ -154,7 +160,8 @@ function drawButtons(){
 
     <button
         class="main-button secondary"
-        onclick="startBath()">
+        onclick="startBath()"
+        ${!myTurn ? "disabled" : ""}>
 
         ♨ 入浴開始
 
@@ -165,6 +172,7 @@ function drawButtons(){
 `;
 
     }
+
 
     // 入浴中
     return `
