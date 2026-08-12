@@ -132,6 +132,16 @@ function saveCurrentUser(){
     );
 
 }
+// アイコン保存
+
+function saveCurrentIcon(){
+
+    localStorage.setItem(
+        "pochan-icon",
+        currentIcon
+    );
+
+}
 
 /* ==========================================
    読み込み
