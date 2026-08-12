@@ -177,7 +177,7 @@ function loadData(){
                     );
 
                     updateCrowded();
-                    drawHome();
+                    //drawHome();
 
                     return;
                 }
@@ -199,7 +199,7 @@ function loadData(){
                 );
 
                 updateCrowded();
-                drawHome();
+               // drawHome();
 
             }
         );
