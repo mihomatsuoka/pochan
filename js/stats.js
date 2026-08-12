@@ -334,7 +334,7 @@ ${name}
     canvas.width = 450;
     canvas.height = 250;
 
-    canvas.style.width = "450px";
+    canvas.style.width = "400px";
     canvas.style.height = "250px";
 
 
@@ -454,7 +454,7 @@ ${name}
 
 
             const x =
-                50 + index * 55;
+                45 + index * 50;
 
 
             const y =
@@ -483,7 +483,7 @@ ${name}
         values.forEach((value,index) => {
 
             const x =
-                50 + index * 55;
+                45 + index * 50;
 
             const y =
                 170 -
@@ -582,7 +582,7 @@ ${name}
 
 
         const x =
-            50 + index * 55;
+            45 + index * 50;
 
 
         ctx.fillStyle =
