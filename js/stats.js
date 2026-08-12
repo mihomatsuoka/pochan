@@ -334,8 +334,8 @@ ${name}
     canvas.width = 300;
     canvas.height = 250;
 
-    canvas.style.width = "300px";
-    canvas.style.height = "250px";
+    canvas.style.width = "100%";
+    canvas.style.height = "auto";
 
 
     // =========================
