@@ -88,13 +88,15 @@ function updateCurrentUser(){
 
     }
 
-    if(currentUser === ""){
+  if(user){
 
-        area.textContent = "未設定";
+    area.textContent = `${user.name}`;
 
-        return;
+}else{
 
-    }
+    area.textContent = "未設定";
+
+}
 
     const user = family.find(
 
