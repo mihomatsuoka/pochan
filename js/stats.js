@@ -331,10 +331,10 @@ ${name}
     const ctx = canvas.getContext("2d");
 
 
-    canvas.width = 400;
+    canvas.width = 300;
     canvas.height = 250;
 
-    canvas.style.width = "400px";
+    canvas.style.width = "300px";
     canvas.style.height = "250px";
 
 
