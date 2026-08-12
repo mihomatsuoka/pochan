@@ -545,7 +545,7 @@ ${name}
 
         ctx.moveTo(30,y);
 
-        ctx.lineTo(400,y);
+        ctx.lineTo(350,y);
 
 
         ctx.stroke();
