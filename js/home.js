@@ -139,14 +139,14 @@ function drawBottomMenu(){
 function drawButtons(){
 
     // お風呂が空いている
-    if(state.current.status === "空き"){
+ if(state.current.status === "空き"){
 
-        // この端末の利用者が待機列にいるか確認
-        const myTurn = state.queue.some(
-            person => person.name === currentUser
-        );
+    // 待機列の先頭がこの端末の利用者か
+    const isFirst =
+        state.queue.length > 0 &&
+        state.queue[0].name === currentUser;
 
-        return `
+    return `
 
 <div class="button-group">
 
@@ -158,21 +158,24 @@ function drawButtons(){
 
     </button>
 
-    <button
-        class="main-button secondary"
-        onclick="startBath()"
-        ${!myTurn ? "disabled" : ""}>
+    ${
+        isFirst
+        ? `
+        <button
+            class="main-button secondary"
+            onclick="startBath()">
 
-        ♨ 入浴開始
+            ♨ 入浴開始
 
-    </button>
+        </button>
+        `
+        : ""
+    }
 
 </div>
 
 `;
-
-    }
-
+}
 
     // 入浴中
     return `
