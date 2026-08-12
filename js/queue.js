@@ -206,6 +206,8 @@ function addQueue(){
 
 function startBath(){
 
+function startBath(){
+
     // お風呂が空いているか
     if(state.current.status !== "空き"){
 
@@ -214,7 +216,6 @@ function startBath(){
         return;
 
     }
-
 
     // この端末の利用者が設定されているか
     if(currentUser === ""){
@@ -225,7 +226,6 @@ function startBath(){
 
     }
 
-
     // 待機列があるか
     if(state.queue.length === 0){
 
@@ -235,18 +235,16 @@ function startBath(){
 
     }
 
-
     // 先頭がこの端末の利用者か確認
     if(state.queue[0].name !== currentUser){
 
-        alert("まだあなたの順番ではありません");
+        alert("まだ待機列の先頭ではありません");
 
         return;
 
     }
 
-
-    // 先頭の人を取得
+    // 先頭の人を入浴させる
     const next = state.queue.shift();
 
 
