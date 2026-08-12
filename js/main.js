@@ -22,7 +22,7 @@ setInterval(() => {
 
     if(currentPage === "home"){
 
-        drawHome();
+      //  drawHome();
 
     }
 
