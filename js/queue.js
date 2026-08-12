@@ -206,8 +206,6 @@ function addQueue(){
 
 function startBath(){
 
-function startBath(){
-
     // お風呂が空いているか
     if(state.current.status !== "空き"){
 
