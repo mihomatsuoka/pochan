@@ -454,7 +454,7 @@ ${name}
 
 
             const x =
-                45 + index * 50;
+                45 + index * 45;
 
 
             const y =
@@ -483,7 +483,7 @@ ${name}
         values.forEach((value,index) => {
 
             const x =
-                45 + index * 50;
+                45 + index * 45;
 
             const y =
                 170 -
@@ -545,7 +545,7 @@ ${name}
 
         ctx.moveTo(30,y);
 
-        ctx.lineTo(350,y);
+        ctx.lineTo(330,y);
 
 
         ctx.stroke();
@@ -582,7 +582,7 @@ ${name}
 
 
         const x =
-            45 + index * 50;
+            45 + index * 45;
 
 
         ctx.fillStyle =
@@ -628,7 +628,7 @@ ${name}
 
 
         const x =
-            30 + index * 80;
+            30 + index * 60;
 
 
         // 色の四角
