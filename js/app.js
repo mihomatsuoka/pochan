@@ -12,6 +12,8 @@ let currentPage = "splash";
 
 // この端末の利用者
 let currentUser = localStorage.getItem("pochan-user") || "";
+// アイコン
+let currentIcon = localStorage.getItem("pochan-icon") || "";
 
 /* ==========================================
    アプリの状態
