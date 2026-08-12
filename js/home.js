@@ -178,7 +178,23 @@ function drawButtons(){
 }
 
     // 入浴中
+  // 入浴中の本人か確認
+const isCurrentUser =
+    state.current.name === currentUser;
+
+if(!isCurrentUser){
+
     return `
+
+<div class="button-group">
+
+</div>
+
+`;
+
+}
+
+return `
 
 <div class="button-group">
 
@@ -193,5 +209,3 @@ function drawButtons(){
 </div>
 
 `;
-
-}
