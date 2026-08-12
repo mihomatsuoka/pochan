@@ -295,13 +295,13 @@ function updateCrowded(){
 
     else if(count<=2){
 
-        state.crowded="🟡 やや混雑";
+        state.crowded="🟡 ちょっと待ってね";
 
     }
 
     else{
 
-        state.crowded="🔴 混雑中";
+        state.crowded="🔴 混雑中！";
 
     }
 
