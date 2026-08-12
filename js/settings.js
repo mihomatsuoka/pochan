@@ -77,46 +77,41 @@ ${drawBottomMenu()}
 /* ==========================================
    利用者表示
 ========================================== */
-
 function updateCurrentUser(){
 
-    const area = document.getElementById("current-user");
+    const area =
+        document.getElementById("current-user");
 
     if(!area){
+        return;
+    }
+
+    if(currentUser === ""){
+
+        area.textContent = "未設定";
 
         return;
 
     }
 
-if(user){
-
-    area.textContent =
-        `${user.name}`;
-
-    const iconArea =
-        document.getElementById("current-icon");
-
-    if(iconArea){
-
-        iconArea.textContent =
-            `アイコン：${currentIcon || user.icon}`;
-
-    }
-
-}else{
-
-    area.textContent = "未設定";
-
-}
     const user = family.find(
-
         person => person.name === currentUser
-
     );
 
     if(user){
 
-        area.textContent = `${user.icon} ${user.name}`;
+        area.textContent =
+            `${user.name}`;
+
+        const iconArea =
+            document.getElementById("current-icon");
+
+        if(iconArea){
+
+            iconArea.textContent =
+                `アイコン：${currentIcon || user.icon}`;
+
+        }
 
     }else{
 
@@ -125,8 +120,7 @@ if(user){
     }
 
 }
-
-
+  
 /* ==========================================
    利用者選択
 ========================================== */
