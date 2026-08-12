@@ -580,6 +580,79 @@ canvas.style.maxWidth = "100%";
 
     });
 
+    // =========================
+// グラフの線と●を前面に描き直す
+// =========================
+
+names.forEach(name => {
+
+    const values = days.map(day =>
+        getDailyFamilyTime(day, name)
+    );
+
+    const colorIndex = names.indexOf(name);
+
+    ctx.strokeStyle =
+        colors[colorIndex % colors.length];
+
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+
+    values.forEach((value, index) => {
+
+        const x =
+            graphLeft + index * xStep;
+
+        const y =
+            170 -
+            (value / maxValue) * 130;
+
+        if(index === 0){
+
+            ctx.moveTo(x, y);
+
+        }else{
+
+            ctx.lineTo(x, y);
+
+        }
+
+    });
+
+    ctx.stroke();
+
+
+    // ●も前面に描く
+
+    values.forEach((value, index) => {
+
+        const x =
+            graphLeft + index * xStep;
+
+        const y =
+            170 -
+            (value / maxValue) * 130;
+
+        ctx.fillStyle =
+            colors[colorIndex % colors.length];
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            4,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    });
+
+});
+
 
   
 
