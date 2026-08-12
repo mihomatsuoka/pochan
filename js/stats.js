@@ -345,6 +345,14 @@ canvas.style.maxWidth = "100%";
 
     const days = getLast7Days();
 
+    const graphLeft = 50;
+
+    const graphRight = canvas.width - 20;
+
+　　const graphWidth = graphRight - graphLeft;
+
+　　const xStep = graphWidth / (days.length - 1);
+
 
     // 記録がない場合
 
@@ -454,8 +462,8 @@ canvas.style.maxWidth = "100%";
         values.forEach((value,index) => {
 
 
-            const x =
-                50 + index * 55;
+          const x =
+    graphLeft + index * xStep;
 
 
             const y =
@@ -483,8 +491,8 @@ canvas.style.maxWidth = "100%";
 
         values.forEach((value,index) => {
 
-            const x =
-                50 + index * 55;
+           const x =
+    graphLeft + index * xStep;
 
             const y =
                 170 -
@@ -546,7 +554,7 @@ canvas.style.maxWidth = "100%";
 
         ctx.moveTo(30,y);
 
-        ctx.lineTo(400,y);
+        ctx.lineTo(graphRight,y);
 
 
         ctx.stroke();
@@ -582,9 +590,8 @@ canvas.style.maxWidth = "100%";
     days.forEach((day,index) => {
 
 
-        const x =
-            50 + index * 55;
-
+      const x =
+    graphLeft + index * xStep;
 
         ctx.fillStyle =
             "#666";
@@ -681,11 +688,13 @@ canvas.style.maxWidth = "100%";
 ========================================== */
 
 function getLast7Days(){
+   
 
-    const days = [];
+
+const days = [];
 
 
-    for(let i = 6; i >= 0; i--){
+   for(let i = 6; i >= 0; i--){
 
         const date = new Date();
 
