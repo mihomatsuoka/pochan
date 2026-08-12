@@ -300,11 +300,6 @@ function finishBath(){
     // 入浴開始時刻を取得
     const start = state.current.start;
 
-
-    // 入浴開始時刻を取得
-    const start = state.current.start;
-
-
     // startが存在しない場合
     if(
         typeof start !== "number" ||
