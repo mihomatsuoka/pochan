@@ -41,6 +41,14 @@ function drawSettings(){
 
     </button>
 
+    <button
+    class="main-button"
+    onclick="selectIcon()">
+
+    🎨 アイコンを変更
+
+</button>
+
 </section>
 
 <section class="card">
@@ -265,5 +273,98 @@ function resetData(){
     alert("データを初期化しました。");
 
     location.reload();
+
+}
+
+function selectIcon(){
+
+    document.body.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+<div id="modal">
+
+<div class="sheet">
+
+<h2>
+🎨 アイコンを変更
+</h2>
+
+<p>
+好きな絵文字を入力してください
+</p>
+
+<input
+    id="icon-input"
+    type="text"
+    value="${currentIcon}"
+    maxlength="2"
+    placeholder="🌸"
+    style="
+        font-size:40px;
+        width:80px;
+        text-align:center;
+        margin:15px auto;
+        display:block;
+    "
+>
+
+<button
+class="main-button"
+onclick="saveIconInput()">
+
+保存
+
+</button>
+
+<button
+class="close-button"
+onclick="closeModal()">
+
+キャンセル
+
+</button>
+
+</div>
+
+</div>
+
+`
+
+    );
+
+}
+
+function saveIconInput(){
+
+    const input =
+        document.getElementById("icon-input");
+
+    if(!input){
+        return;
+    }
+
+    const icon =
+        input.value.trim();
+
+    if(icon === ""){
+
+        alert("絵文字を入力してください。");
+
+        return;
+
+    }
+
+    currentIcon = icon;
+
+    saveCurrentIcon();
+
+    closeModal();
+
+    updateCurrentUser();
+
+    drawHome();
 
 }
