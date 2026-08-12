@@ -331,7 +331,7 @@ ${name}
     const ctx = canvas.getContext("2d");
 
 
-    canvas.width = 300;
+    canvas.width = 450;
     canvas.height = 250;
 
     canvas.style.width = "100%";
