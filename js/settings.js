@@ -363,6 +363,4 @@ function saveIconInput(){
 
     updateCurrentUser();
 
-    drawHome();
-
 }
