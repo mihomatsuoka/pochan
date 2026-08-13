@@ -487,12 +487,65 @@ function testNotification(){
 
 function toggleNotification(){
 
-    state.notification.enabled =
-        !state.notification.enabled;
+    // OFFにする場合
+    if(state.notification.enabled){
 
-    saveData();
+        state.notification.enabled = false;
 
-    drawSettings();
+        saveData();
+
+        drawSettings();
+
+        return;
+
+    }
+
+
+    // ONにする場合
+    if(!("Notification" in window)){
+
+        alert(
+            "この端末では通知を利用できません。"
+        );
+
+        return;
+
+    }
+
+
+    if(Notification.permission === "granted"){
+
+        state.notification.enabled = true;
+
+        saveData();
+
+        drawSettings();
+
+        return;
+
+    }
+
+
+    Notification.requestPermission()
+        .then(permission => {
+
+            if(permission === "granted"){
+
+                state.notification.enabled = true;
+
+                saveData();
+
+                drawSettings();
+
+            }else{
+
+                alert(
+                    "通知が許可されていません。"
+                );
+
+            }
+
+        });
 
 }
 
