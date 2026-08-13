@@ -180,24 +180,32 @@ function loadData(){
                     return;
                 }
 
-                // Firebaseのデータを読み込む
-                Object.assign(
-                    state,
-                    firebaseData
-                );
 
-                // localStorageにも同期
-                localStorage.setItem(
-                    "pochan-data",
-                    JSON.stringify(state)
-                );
+            // checkQUeueNotification();
+// Firebaseのデータを読み込む
+Object.assign(
+    state,
+    firebaseData
+);
 
-                console.log(
-                    "Firebaseからデータを読み込みました"
-                );
 
-                updateCrowded();
-               // drawHome();
+// localStorageにも同期
+localStorage.setItem(
+    "pochan-data",
+    JSON.stringify(state)
+);
+
+
+console.log(
+    "Firebaseからデータを読み込みました"
+);
+
+
+updateCrowded();
+
+
+// Firebaseの変更後に通知チェック
+checkQueueNotification();
 
             }
         );
