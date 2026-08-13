@@ -112,7 +112,7 @@ function joinQueue(){
 </h2>
 
 <p>
-${user.icon} ${user.name} を
+${currentIcon || user.icon} ${user.name} を
 待機列へ追加しますか？
 </p>
 
@@ -180,13 +180,13 @@ function addQueue(){
     }
 
 
-    state.queue.push({
+state.queue.push({
 
-        name:user.name,
+    name:user.name,
 
-        icon:user.icon
+    icon:currentIcon || user.icon
 
-    });
+});
 
 
     updateCrowded();
