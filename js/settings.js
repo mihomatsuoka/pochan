@@ -27,10 +27,7 @@ function drawSettings(){
 
    <p id="current-user">
 
-</p>
-
-<p id="current-icon">
-
+   <p id="current-icon">
 </p>
 
     <button
@@ -46,7 +43,7 @@ function drawSettings(){
     class="main-button"
     onclick="selectIcon()">
 
-    🔥🔥🔥 アイコンを変更 🔥🔥🔥
+    　🖌️ アイコンを変更 
 
 </button>
 
