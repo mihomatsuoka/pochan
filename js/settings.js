@@ -92,7 +92,7 @@ function drawSettings(){
     >
 
     分
-<div>
+</div>
 
 <button
     class="main-button"
