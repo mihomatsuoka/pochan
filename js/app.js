@@ -182,11 +182,75 @@ function loadData(){
 
 
             // checkQUeueNotification();
+// Firebase更新前の自分の順位を保存
+let oldPosition = 0;
+
+if(currentUser !== ""){
+
+    const oldIndex =
+        state.queue.findIndex(
+            person => person.name === currentUser
+        );
+
+    if(oldIndex !== -1){
+
+        oldPosition = oldIndex + 1;
+
+    }
+
+}
+
+
 // Firebaseのデータを読み込む
 Object.assign(
     state,
     firebaseData
 );
+
+
+// Firebase更新後の自分の順位
+let newPosition = 0;
+
+if(currentUser !== ""){
+
+    const newIndex =
+        state.queue.findIndex(
+            person => person.name === currentUser
+        );
+
+    if(newIndex !== -1){
+
+        newPosition = newIndex + 1;
+
+    }
+
+}
+
+
+// 2番目 → 1番目になった瞬間
+if(
+    oldPosition === 2 &&
+    newPosition === 1
+){
+
+    if(
+        state.notification &&
+        state.notification.enabled &&
+        "Notification" in window &&
+        Notification.permission === "granted"
+    ){
+
+        new Notification(
+            "♨️ ぽちゃんからのお知らせ",
+            {
+                body:
+                    "もうすぐお風呂です！"
+            }
+        );
+
+    }
+
+}
 
 
 // localStorageにも同期
@@ -196,15 +260,10 @@ localStorage.setItem(
 );
 
 
-console.log(
-    "Firebaseからデータを読み込みました"
-);
-
-
 updateCrowded();
 
 
-// Firebaseの変更後に通知チェック
+// 通常の通知チェック
 checkQueueNotification();
 
             }
