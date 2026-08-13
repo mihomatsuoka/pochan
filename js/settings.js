@@ -92,20 +92,19 @@ function drawSettings(){
 
     分
 
-    <button
-        class="main-button"
-        onclick="saveNotificationSettings()">
-        style="margin-top:10px;">
+<button
+    class="main-button"
+    onclick="saveNotificationSettings()">
 
+    設定を保存
 
-        設定を保存
+</button>
 
-    </button>
+<br>
 
-   <button
+<button
     class="main-button secondary"
-    onclick="testNotification()"
-    style="margin-top:20px;">
+    onclick="testNotification()">
 
     📢 テスト通知
 
