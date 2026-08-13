@@ -26,9 +26,10 @@ function drawSettings(){
     <h2>👤 この端末</h2>
 
    <p id="current-user">
+   </p>
 
-   <p id="current-icon">
-</p>
+  <p id="current-icon">
+   </p>
 
     <button
         class="main-button"
