@@ -77,6 +77,7 @@ function drawSettings(){
         ⏰ 長風呂通知
     </p>
 
+<div>
     <input
         id="long-bath-minutes"
         type="number"
@@ -91,6 +92,7 @@ function drawSettings(){
     >
 
     分
+<div>
 
 <button
     class="main-button"
