@@ -44,7 +44,12 @@ const state = {
 　　records: [],
 
     // 混雑状況
-    crowded: "🟢 空いています"
+    crowded: "🟢 空いています",
+
+   notification: {
+    enabled: true,
+    longBathMinutes: 30
+}
 
 };
 
