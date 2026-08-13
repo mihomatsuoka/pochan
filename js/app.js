@@ -18,6 +18,9 @@ let currentIcon = localStorage.getItem("pochan-icon") || "";
 let previousQueuePosition = 0;
 
 let notifiedAsFirst = false;
+
+let longBathNotified = false;
+
 /* ==========================================
    アプリの状態
 ========================================== */
@@ -474,3 +477,98 @@ function checkQueueNotification(){
         currentPosition;
 
 }
+
+/* ==========================================
+   長風呂通知
+========================================== */
+
+function checkLongBathNotification(){
+
+    // 通知設定がOFFなら終了
+    if(
+        !state.notification ||
+        !state.notification.enabled
+    ){
+        return;
+    }
+
+
+    // 入浴中ではない
+    if(state.current.status !== "入浴中"){
+
+        longBathNotified = false;
+
+        return;
+
+    }
+
+
+    // 次の人が待っていない
+    if(state.queue.length === 0){
+
+        longBathNotified = false;
+
+        return;
+
+    }
+
+
+    // 入浴時間を計算
+    const bathMinutes =
+        Math.floor(
+            (Date.now() - state.current.start) / 60000
+        );
+
+
+    // 指定時間未満なら何もしない
+    if(
+        bathMinutes <
+        state.notification.longBathMinutes
+    ){
+
+        return;
+
+    }
+
+
+    // すでに通知済みなら何もしない
+    if(longBathNotified){
+
+        return;
+
+    }
+
+
+    // 通知が許可されているか
+    if(
+        !("Notification" in window) ||
+        Notification.permission !== "granted"
+    ){
+
+        return;
+
+    }
+
+
+    // 長風呂通知
+    new Notification(
+        "♨️ ぽちゃんからのお知らせ",
+        {
+            body:
+                `${state.current.name}さん、そろそろお風呂を交代してね！`
+        }
+    );
+
+
+    // 1回通知したら再通知しない
+    longBathNotified = true;
+
+}
+
+setInterval(
+    checkLongBathNotification,
+    30000
+);
+
+
+
