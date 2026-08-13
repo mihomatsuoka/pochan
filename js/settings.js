@@ -451,3 +451,65 @@ function testNotification(){
     );
 
 }
+
+/* ==========================================
+   通知ON / OFF
+========================================== */
+
+function toggleNotification(){
+
+    state.notification.enabled =
+        !state.notification.enabled;
+
+    saveData();
+
+    drawSettings();
+
+}
+
+
+/* ==========================================
+   通知設定保存
+========================================== */
+
+function saveNotificationSettings(){
+
+    const input =
+        document.getElementById(
+            "long-bath-minutes"
+        );
+
+    if(!input){
+        return;
+    }
+
+    const minutes =
+        Number(input.value);
+
+    if(
+        !Number.isFinite(minutes) ||
+        minutes <= 0
+    ){
+
+        alert(
+            "1分以上の時間を設定してください。"
+        );
+
+        return;
+
+    }
+
+    state.notification.longBathMinutes =
+        minutes;
+
+    saveData();
+
+    alert(
+        `長風呂通知を${minutes}分に設定しました。`
+    );
+
+    drawSettings();
+
+}
+
+
