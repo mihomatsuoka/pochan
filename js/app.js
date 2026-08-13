@@ -206,6 +206,11 @@ Object.assign(
     state,
     firebaseData
 );
+console.log(
+    "通知チェック",
+    "利用者:", currentUser,
+    "待機列:", state.queue
+);               
 
 
 // Firebase更新後の自分の順位
@@ -226,7 +231,11 @@ if(currentUser !== ""){
 
 }
 
-
+console.log(
+    "順位チェック",
+    "前:", oldPosition,
+    "後:", newPosition
+);
 // 2番目 → 1番目になった瞬間
 if(
     oldPosition === 2 &&
