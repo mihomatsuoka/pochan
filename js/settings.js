@@ -139,7 +139,6 @@ function selectUser(){
 class="member-button"
 onclick="setCurrentUser('${person.name}')">
 
-${person.icon}
 ${person.name}
 
 </button>
