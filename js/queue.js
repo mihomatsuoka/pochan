@@ -270,6 +270,8 @@ function startBath(){
 
     drawHome();
 
+    checkQueueNotification();
+
 }
 /* ==========================================
    入浴終了
@@ -376,5 +378,7 @@ function finishBath(){
     saveData();
 
     drawHome();
+
+    checkQueueNotification();
 
 }
