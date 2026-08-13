@@ -402,7 +402,7 @@ function checkQueueNotification(){
     }
 
 
-    // 通知が利用できない場合
+    // 通知が利用できない
     if(
         !("Notification" in window) ||
         Notification.permission !== "granted"
@@ -447,37 +447,36 @@ function checkQueueNotification(){
     // ==========================================
     // 1番目になった瞬間
     // ==========================================
-if(
-    currentPosition === 1 &&
-    previousQueuePosition !== 1 &&
-    !notifiedAsFirst
-){
 
-    // お風呂が空いている
-    if(state.current.status === "空き"){
+    if(
+        currentPosition === 1 &&
+        previousQueuePosition !== 1 &&
+        !notifiedAsFirst
+    ){
 
-        new Notification(
-            "♨️ ぽちゃんの時間です！",
-            {
-                body:
-                    "お風呂の順番になりました。"
-            }
-        );
+        // お風呂が空いている
+        if(state.current.status === "空き"){
 
-              notifiedAsFirst = true;
+            new Notification(
+                "♨️ ぽちゃんの時間です！",
+                {
+                    body:
+                        "お風呂の順番になりました。"
+                }
+            );
+
+            notifiedAsFirst = true;
+
+        }
 
     }
 
+
+    // 今回の順位を保存
+    previousQueuePosition =
+        currentPosition;
+
 }
-
-// 順位を保存
-previousQueuePosition = currentPosition;
-
-}
-
-/* ==========================================
-   長風呂通知
-========================================== */
 /* ==========================================
    長風呂通知
 ========================================== */
