@@ -18,9 +18,6 @@ let currentIcon = localStorage.getItem("pochan-icon") || "";
 let previousQueuePosition = 0;
 
 let notifiedAsFirst = false;
-
-let longBathNotified = false;
-
 /* ==========================================
    アプリの状態
 ========================================== */
