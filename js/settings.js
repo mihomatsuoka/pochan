@@ -66,9 +66,10 @@ function drawSettings(){
 
     <button
         class="main-button"
-        onclick="requestNotificationPermission()">
+        onclick="toggleNotification()">
 
-        🔔 通知を許可する
+        🔔 通知：
+        ${state.notification.enabled ? "ON" : "OFF"}
 
     </button>
 
