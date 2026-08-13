@@ -14,6 +14,8 @@ let currentPage = "splash";
 let currentUser = localStorage.getItem("pochan-user") || "";
 // アイコン
 let currentIcon = localStorage.getItem("pochan-icon") || "";
+// 通知用：前回の待機順位
+let previousQueuePosition = 0;
 
 /* ==========================================
    アプリの状態
@@ -339,51 +341,69 @@ function checkQueueNotification(){
     }
 
 
-    // 待機列が空
-    if(state.queue.length === 0){
-
-        return;
-
-    }
-
-
-    // 先頭の人
-    const first =
-        state.queue[0];
-
-
-    // 自分が先頭ではない
-    if(first.name !== currentUser){
-
-        return;
-
-    }
-
-
-    // お風呂が空いている
-    if(state.current.status === "空き"){
-
-        new Notification(
-            "♨️ ぽちゃんの時間です！",
-            {
-                body:
-                    "お風呂の順番になりました。"
-            }
+    // 待機列から自分を探す
+    const position =
+        state.queue.findIndex(
+            person => person.name === currentUser
         );
 
+
+    // 待機列にいない
+    if(position === -1){
+
+        previousQueuePosition = 0;
+
         return;
 
     }
 
 
-    // 誰かが入浴中
-    new Notification(
-        "♨️ ぽちゃんからのお知らせ",
-        {
-            body:
-                "もうすぐお風呂です！"
+    // 順位は0から始まるので +1
+    const currentPosition =
+        position + 1;
+
+
+    // ==========================================
+    // 1番目になった瞬間
+    // ==========================================
+
+    if(
+        currentPosition === 1 &&
+        previousQueuePosition !== 1
+    ){
+
+        // お風呂が空いている
+        if(state.current.status === "空き"){
+
+            new Notification(
+                "♨️ ぽちゃんの時間です！",
+                {
+                    body:
+                        "お風呂の順番になりました。"
+                }
+            );
+
         }
-    );
+
+        // 誰かが入浴中
+        else{
+
+            new Notification(
+                "♨️ ぽちゃんからのお知らせ",
+                {
+                    body:
+                        "もうすぐお風呂です！"
+                }
+            );
+
+        }
+
+    }
+
+
+    // 今回の順位を保存
+    previousQueuePosition =
+        currentPosition;
 
 }
 
@@ -430,6 +450,6 @@ function checkQueueNotification(){
             }
         );
 
-    }
+    
 
 }
