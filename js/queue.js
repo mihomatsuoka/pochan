@@ -191,6 +191,8 @@ state.queue.push({
     closeModal();
 
     drawHome();
+    
+    checkQueueNotification();
 
 }
 
