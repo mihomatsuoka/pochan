@@ -72,6 +72,33 @@ function drawSettings(){
 
     </button>
 
+     <p>
+        ⏰ 長風呂通知
+    </p>
+
+    <input
+        id="long-bath-minutes"
+        type="number"
+        min="1"
+        value="${state.notification.longBathMinutes}"
+        style="
+            width:80px;
+            padding:8px;
+            font-size:16px;
+            text-align:center;
+        "
+    >
+
+    分
+
+    <button
+        class="main-button"
+        onclick="saveNotificationSettings()">
+
+        設定を保存
+
+    </button>
+
     <button
         class="main-button secondary"
         onclick="testNotification()">
@@ -80,6 +107,7 @@ function drawSettings(){
 
     </button>
 
+</section>
 </section>
 
 <section class="card">
