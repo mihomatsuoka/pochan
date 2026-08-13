@@ -176,11 +176,12 @@ function addQueue(){
 
 state.queue.push({
 
-    name:user.name,
+    name: user.name,
 
-    icon:currentIcon
+    icon: currentIcon
 
 });
+    console.log("追加した待機列:", state.queue);
 
 
     updateCrowded();
