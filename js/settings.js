@@ -100,13 +100,14 @@ function drawSettings(){
 
     </button>
 
-    <button
-        class="main-button secondary"
-        onclick="testNotification()">
+   <button
+    class="main-button secondary"
+    onclick="testNotification()"
+    style="margin-top:10px;">
 
-        📢 テスト通知
+    📢 テスト通知
 
-    </button>
+</button>
 
 </section>
 </section>
