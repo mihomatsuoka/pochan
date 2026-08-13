@@ -17,12 +17,6 @@ function drawQueue(){
 
 <li>
 
-<div>
-
-${person.icon}
-${person.name}
-
-</div>
 
 
 <div class="queue-number">
@@ -112,7 +106,7 @@ function joinQueue(){
 </h2>
 
 <p>
-${currentIcon || user.icon} ${user.name} を
+${currentIcon} ${user.name} を
 待機列へ追加しますか？
 </p>
 
@@ -184,7 +178,7 @@ state.queue.push({
 
     name:user.name,
 
-    icon:currentIcon || user.icon
+    icon:currentIcon
 
 });
 
