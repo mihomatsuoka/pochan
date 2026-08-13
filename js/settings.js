@@ -95,6 +95,8 @@ function drawSettings(){
     <button
         class="main-button"
         onclick="saveNotificationSettings()">
+        style="margin-top:10px;">
+
 
         設定を保存
 
@@ -103,7 +105,7 @@ function drawSettings(){
    <button
     class="main-button secondary"
     onclick="testNotification()"
-    style="margin-top:10px;">
+    style="margin-top:20px;">
 
     📢 テスト通知
 
