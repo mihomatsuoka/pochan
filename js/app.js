@@ -304,6 +304,90 @@ function updateCrowded(){
 }
 
 /* ==========================================
+   待機列通知
+========================================== */
+
+function checkQueueNotification(){
+
+    // 通知設定がOFFなら何もしない
+    if(
+        !state.notification ||
+        !state.notification.enabled
+    ){
+
+        return;
+
+    }
+
+
+    // 通知が利用できない場合
+    if(
+        !("Notification" in window) ||
+        Notification.permission !== "granted"
+    ){
+
+        return;
+
+    }
+
+
+    // 利用者未設定
+    if(currentUser === ""){
+
+        return;
+
+    }
+
+
+    // 待機列が空
+    if(state.queue.length === 0){
+
+        return;
+
+    }
+
+
+    // 先頭の人
+    const first =
+        state.queue[0];
+
+
+    // 自分が先頭ではない
+    if(first.name !== currentUser){
+
+        return;
+
+    }
+
+
+    // お風呂が空いている
+    if(state.current.status === "空き"){
+
+        new Notification(
+            "♨️ ぽちゃんの時間です！",
+            {
+                body:
+                    "お風呂の順番になりました。"
+            }
+        );
+
+        return;
+
+    }
+
+
+    // 誰かが入浴中
+    new Notification(
+        "♨️ ぽちゃんからのお知らせ",
+        {
+            body:
+                "もうすぐお風呂です！"
+        }
+    );
+
+}
+
+/* ==========================================
    待機列の先頭通知
 ========================================== */
 
