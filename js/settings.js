@@ -115,7 +115,7 @@ function updateCurrentUser(){
         if(iconArea){
 
             iconArea.textContent =
-                `アイコン：${currentIcon || user.icon}`;
+                `アイコン：${currentIcon}`;
 
         }
 
@@ -298,7 +298,7 @@ function selectIcon(){
     type="text"
     value="${currentIcon}"
     maxlength="2"
-    placeholder="🌸"
+    placeholder="　"
     style="
         font-size:40px;
         width:80px;
