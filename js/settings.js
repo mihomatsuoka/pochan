@@ -44,7 +44,7 @@ function drawSettings(){
     class="main-button"
     onclick="selectIcon()">
 
-    　🖌️ アイコンを変更 
+   🖌️ アイコンを変更 
 
 </button>
 
