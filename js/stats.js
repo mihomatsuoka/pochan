@@ -693,7 +693,7 @@ names.forEach(name => {
 
 
         const x =
-            30 + index * 80;
+            20 + index * 60;
 
 
         // 色の四角
