@@ -58,7 +58,7 @@ function drawSettings(){
 
 </section>
 
-<section class="card">
+<section class="card" style="display:flex; flex-direction:column; gap:10px;">
 
     <h2>🔔 通知</h2>
 
@@ -100,17 +100,18 @@ function drawSettings(){
 
 </button>
 
-<br>
+<div style="margin-top:10px;">
 
-<button
-    class="main-button secondary"
-    onclick="testNotification()">
+    <button
+        class="main-button secondary"
+        onclick="testNotification()">
 
-    📢 テスト通知
+        📢 テスト通知
 
-</button>
+    </button>
 
-</section>
+</div>
+
 </section>
 
 <section class="card">
