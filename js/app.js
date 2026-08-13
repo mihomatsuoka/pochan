@@ -17,6 +17,8 @@ let currentIcon = localStorage.getItem("pochan-icon") || "";
 // 通知用：前回の待機順位
 let previousQueuePosition = 0;
 
+let notifiedAsFirst = false;
+
 /* ==========================================
    アプリの状態
 ========================================== */
@@ -428,6 +430,7 @@ function checkQueueNotification(){
     if(position === -1){
 
         previousQueuePosition = 0;
+        notifiedAsFirst = false;
 
         return;
 
@@ -442,24 +445,26 @@ function checkQueueNotification(){
     // ==========================================
     // 1番目になった瞬間
     // ==========================================
+if(
+    currentPosition === 1 &&
+    previousQueuePosition !== 1 &&
+    !notifiedAsFirst
+){
 
-    if(
-        currentPosition === 1 &&
-        previousQueuePosition !== 1
-    ){
+    // お風呂が空いている
+    if(state.current.status === "空き"){
 
-        // お風呂が空いている
-        if(state.current.status === "空き"){
+        new Notification(
+            "♨️ ぽちゃんの時間です！",
+            {
+                body:
+                    "お風呂の順番になりました。"
+            }
+        );
 
-            new Notification(
-                "♨️ ぽちゃんの時間です！",
-                {
-                    body:
-                        "お風呂の順番になりました。"
-                }
-            );
-
-        }
+        notifiedAsFirst = true;
 
     }
+
 }
+ 
