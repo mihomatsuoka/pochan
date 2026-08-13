@@ -3,28 +3,28 @@ function drawQueue(){
     if(state.queue.length === 0){
 
         return `
-
 <li>
 待っている人はいません
 </li>
-
 `;
 
     }
-
 
     return state.queue.map((person,index)=>`
 
 <li>
 
+<div>
 
+${person.name}
+
+</div>
 
 <div class="queue-number">
 
 ${index + 1}
 
 </div>
-
 
 </li>
 
