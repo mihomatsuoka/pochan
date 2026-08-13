@@ -60,6 +60,30 @@ function drawSettings(){
 
 <section class="card">
 
+    <h2>🔔 通知</h2>
+
+    <p>お風呂の順番などをお知らせします。</p>
+
+    <button
+        class="main-button"
+        onclick="requestNotificationPermission()">
+
+        🔔 通知を許可する
+
+    </button>
+
+    <button
+        class="main-button secondary"
+        onclick="testNotification()">
+
+        📢 テスト通知
+
+    </button>
+
+</section>
+
+<section class="card">
+
     <h2>🗑 データ</h2>
 
     <button
@@ -362,5 +386,68 @@ function saveIconInput(){
     closeModal();
 
     updateCurrentUser();
+
+}
+
+/* ==========================================
+   通知
+========================================== */
+
+function requestNotificationPermission(){
+
+    if(!("Notification" in window)){
+
+        alert("この端末では通知を利用できません。");
+
+        return;
+
+    }
+
+    Notification.requestPermission()
+        .then(permission => {
+
+            if(permission === "granted"){
+
+                alert("通知を許可しました！");
+
+            }else{
+
+                alert("通知が許可されていません。");
+
+            }
+
+        });
+
+}
+
+
+/* ==========================================
+   テスト通知
+========================================== */
+
+function testNotification(){
+
+    if(!("Notification" in window)){
+
+        alert("この端末では通知を利用できません。");
+
+        return;
+
+    }
+
+    if(Notification.permission !== "granted"){
+
+        alert("先に「通知を許可する」を押してください。");
+
+        return;
+
+    }
+
+    new Notification(
+        "♨ ぽちゃん",
+        {
+            body: "お風呂の通知テストです！"
+        }
+    );
 
 }
