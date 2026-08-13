@@ -567,9 +567,3 @@ function checkLongBathNotification(){
     longBathNotified = true;
 
 }
-
-   setInterval(
-    checkLongBathNotification,
-    30000
-);
- 
