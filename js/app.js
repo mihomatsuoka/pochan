@@ -461,24 +461,5 @@ function checkQueueNotification(){
 
         }
 
-        // 誰かが入浴中
-        else{
-
-            new Notification(
-                "♨️ ぽちゃんからのお知らせ",
-                {
-                    body:
-                        "もうすぐお風呂です！"
-                }
-            );
-
-        }
-
     }
-
-
-    // 今回の順位を保存
-    previousQueuePosition =
-        currentPosition;
-
 }
