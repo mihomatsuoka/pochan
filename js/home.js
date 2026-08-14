@@ -138,76 +138,113 @@ function drawBottomMenu(){
 
 function drawButtons(){
 
-    // お風呂が空いている
- if(state.current.status === "空き"){
+    // ==========================================
+    // 自分が入浴中
+    // ==========================================
 
-    // 待機列の先頭がこの端末の利用者か
+    if(state.current.name === currentUser){
+
+        return `
+
+        <div class="button-group">
+
+            <button
+                class="main-button danger"
+                onclick="finishBath()">
+
+                🚪 入浴終了
+
+            </button>
+
+        </div>
+
+        `;
+
+    }
+
+
+    // ==========================================
+    // 自分が待機列にいるか
+    // ==========================================
+
+    const isWaiting =
+        state.queue.some(
+            person => person.name === currentUser
+        );
+
+
+    // ==========================================
+    // 待機列にいない
+    // ==========================================
+
+    if(!isWaiting){
+
+        return `
+
+        <div class="button-group">
+
+            <button
+                class="main-button"
+                onclick="joinQueue()">
+
+                ➕ 順番待ち
+
+            </button>
+
+        </div>
+
+        `;
+
+    }
+
+
+    // ==========================================
+    // 待機列にいる
+    // ==========================================
+
     const isFirst =
         state.queue.length > 0 &&
         state.queue[0].name === currentUser;
 
-    return `
 
-<div class="button-group">
-
-    <button
-        class="main-button"
-        onclick="joinQueue()">
-
-        ➕ 順番待ち
-
-    </button>
-
-    ${
+    // お風呂が空いていて自分が先頭なら
+    if(
+        state.current.status === "空き" &&
         isFirst
-        ? `
-        <button
-            class="main-button secondary"
-            onclick="startBath()">
+    ){
 
-            ♨ 入浴開始
+        return `
 
-        </button>
-        `
-        : ""
+        <div class="button-group">
+
+            <button
+                class="main-button secondary"
+                onclick="startBath()">
+
+                ♨ 入浴開始
+
+            </button>
+
+        </div>
+
+        `;
+
     }
 
-</div>
 
-`;
-}
-
-    // 入浴中
-  // 入浴中の本人か確認
-const isCurrentUser =
-    state.current.name === currentUser;
-
-if(!isCurrentUser){
-
+    // 待機中だがまだ順番ではない
     return `
 
-<div class="button-group">
+    <div class="button-group">
 
-</div>
+        <p>
+            🪵 現在 ${state.queue.findIndex(
+                person => person.name === currentUser
+            ) + 1} 番目です
+        </p>
 
-`;
+    </div>
 
-}
-
-return `
-
-<div class="button-group">
-
-    <button
-        class="main-button danger"
-        onclick="finishBath()">
-
-        🚪 入浴終了
-
-    </button>
-
-</div>
-
-`;
+    `;
 
 }
