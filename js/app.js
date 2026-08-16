@@ -214,6 +214,16 @@ Object.assign(
     state,
     firebaseData
 );
+               
+// 本日の湯の情報がまだない場合
+if(!state.bathInfo){
+
+    state.bathInfo = {
+        cleaned: false,
+        availableTime: ""
+    };
+
+}
 console.log(
     "通知チェック",
     "利用者:", currentUser,
