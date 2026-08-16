@@ -56,9 +56,10 @@ const state = {
     enabled: true,
     longBathMinutes: 30
 },
-   bathInfo: {
+ bathInfo: {
     cleaned: false,
-    availableTime: ""
+    availableTime: "",
+    date: ""
 }
 
 };
@@ -593,5 +594,53 @@ setInterval(
     30000
 );
 
+/* ==========================================
+   掃除状態切り替え
+========================================== */
+
+function toggleBathCleaned(){
+
+    state.bathInfo.cleaned =
+        !state.bathInfo.cleaned;
+
+    saveData();
+
+    drawHome();
+
+}
+
+/* ==========================================
+   本日の湯の日付チェック
+========================================== */
+
+function checkBathInfoDate(){
+
+    const today =
+        new Date().toLocaleDateString("ja-JP");
+
+    // 日付が変わっていたらリセット
+    if(state.bathInfo.date !== today){
+
+        state.bathInfo = {
+
+            cleaned: false,
+
+            availableTime: "",
+
+            date: today
+
+        };
+
+        saveData();
+
+        console.log(
+            "日付が変わったため、本日の湯をリセットしました"
+        );
+
+    }
+
+}
+
+checkBathInfoDate();
 
 
