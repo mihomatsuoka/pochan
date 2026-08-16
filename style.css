@@ -1005,3 +1005,29 @@ background:#b35d5d;
     animation:drop 1.2s infinite;
 
 }
+
+/* ==========================================
+   入浴可能時刻
+========================================== */
+
+#available-time{
+
+    display:block;
+
+    width:100%;
+
+    padding:12px;
+
+    margin:10px 0;
+
+    border:1px solid var(--line);
+
+    border-radius:14px;
+
+    background:var(--paper);
+
+    color:var(--text);
+
+    font-size:16px;
+
+}
