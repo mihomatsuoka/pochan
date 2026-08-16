@@ -38,6 +38,10 @@ function drawHome(){
     </span>
 </p>
 
+<p class="bath-note">
+    ※ 毎日0時に未完了に戻ります
+</p>
+
     <button
         class="main-button"
         onclick="toggleBathCleaned()">
