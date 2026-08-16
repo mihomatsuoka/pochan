@@ -44,14 +44,28 @@ function drawHome(){
 
     </button>
 
-    <p>
-        🛁 入浴可能：
-        ${
-            state.bathInfo.availableTime
-            ? state.bathInfo.availableTime + "〜"
-            : "未設定"
-        }
-    </p>
+  <p>
+    🛁 入浴可能：
+    ${
+        state.bathInfo.availableTime
+        ? state.bathInfo.availableTime + "〜"
+        : "未設定"
+    }
+</p>
+
+<input
+    type="time"
+    id="available-time"
+    value="${state.bathInfo.availableTime}"
+>
+
+<button
+    class="main-button"
+    onclick="setBathAvailableTime()">
+
+    入浴可能時刻を設定
+
+</button>
 
 </section>
 
