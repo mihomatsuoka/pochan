@@ -23,14 +23,20 @@ function drawHome(){
 
     <p>${state.crowded}</p>
 
-    <p>
-        🧹 掃除：
+  <p class="clean-status">
+    🧹 掃除：
+    <span class="${
+        state.bathInfo.cleaned
+        ? "cleaned"
+        : "not-cleaned"
+    }">
         ${
             state.bathInfo.cleaned
             ? "○ 完了"
             : "× 未完了"
         }
-    </p>
+    </span>
+</p>
 
     <button
         class="main-button"
