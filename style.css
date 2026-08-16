@@ -1099,3 +1099,26 @@ background:#b35d5d;
     font-size:12px;
 
 }
+
+/* ==========================================
+   本日の湯・状態表示
+========================================== */
+
+/* 掃除・入浴可能をさらに大きく */
+.today p{
+    font-size:23px;
+    font-weight:bold;
+    color:var(--text);
+}
+
+
+/* 掃除完了 */
+.today .cleaned{
+    color:var(--green);
+}
+
+
+/* 掃除未完了 */
+.today .not-cleaned{
+    color:#B35D5D;
+}
