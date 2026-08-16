@@ -21,10 +21,8 @@ function drawHome(){
 
     <h2>♨ 本日の湯</h2>
 
-    <!-- 混雑状況 -->
     <p>${state.crowded}</p>
 
-    <!-- 掃除状況 -->
     <p>
         🧹 掃除：
         ${
@@ -34,7 +32,18 @@ function drawHome(){
         }
     </p>
 
-    <!-- 入浴可能時刻 -->
+    <button
+        class="main-button"
+        onclick="toggleBathCleaned()">
+
+        ${
+            state.bathInfo.cleaned
+            ? "掃除を未完了に戻す"
+            : "掃除完了にする"
+        }
+
+    </button>
+
     <p>
         🛁 入浴可能：
         ${
