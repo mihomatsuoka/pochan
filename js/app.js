@@ -589,10 +589,10 @@ function checkLongBathNotification(){
 
 }
 
-setInterval(
+/*setInterval(
     checkLongBathNotification,
     30000
-);
+); */
 
 /* ==========================================
    掃除状態切り替え
