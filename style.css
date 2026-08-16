@@ -1122,3 +1122,59 @@ background:#b35d5d;
 .today .not-cleaned{
     color:#B35D5D;
 }
+
+/* ==========================================
+   本日の入浴状況
+========================================== */
+
+.today-bath-person{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 4px;
+
+    border-bottom:1px solid var(--line);
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.today-bath-person:last-child{
+
+    border-bottom:none;
+
+}
+
+.today-bath-name{
+
+    color:var(--text);
+
+}
+
+
+/* 入浴済み */
+
+.today-bath-done{
+
+    color:var(--green);
+
+    font-size:16px;
+
+}
+
+
+/* 未入浴 */
+
+.today-bath-notyet{
+
+    color:#B35D5D;
+
+    font-size:16px;
+
+}
