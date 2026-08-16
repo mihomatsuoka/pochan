@@ -16,14 +16,22 @@ window.addEventListener("load", async () => {
 
 });
 
-
-// 1秒ごとにタイマー更新
+//taima-
 setInterval(() => {
 
     if(currentPage === "home"){
 
-       drawHome();
+        const timer =
+            document.querySelector(".timer");
+
+        if(timer){
+
+            timer.textContent =
+                "⏱ " + getBathTime();
+
+        }
 
     }
 
 }, 1000);
+
