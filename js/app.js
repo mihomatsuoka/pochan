@@ -643,4 +643,36 @@ function checkBathInfoDate(){
 
 checkBathInfoDate();
 
+/* ==========================================
+   入浴可能時刻設定
+========================================== */
+
+function setBathAvailableTime(){
+
+    const input =
+        document.getElementById("available-time");
+
+    if(!input){
+
+        return;
+
+    }
+
+    if(input.value === ""){
+
+        alert("入浴可能時刻を選択してください。");
+
+        return;
+
+    }
+
+    state.bathInfo.availableTime =
+        input.value;
+
+    saveData();
+
+    drawHome();
+
+}
+
 
