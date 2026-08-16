@@ -190,7 +190,7 @@ function loadData(){
                 }
 
 
-            // checkQUeueNotification();
+             checkQUeueNotification();
 // Firebase更新前の自分の順位を保存
 let oldPosition = 0;
 
@@ -589,10 +589,10 @@ function checkLongBathNotification(){
 
 }
 
-/*setInterval(
+　setInterval(
     checkLongBathNotification,
     30000
-); */
+); 
 
 /* ==========================================
    掃除状態切り替え
