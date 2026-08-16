@@ -1033,63 +1033,69 @@ background:#b35d5d;
 }
 
 /* ==========================================
-   本日の湯
+   本日の湯・見やすさ調整
 ========================================== */
 
 .today{
     text-align:center;
 }
 
-.today p{
-    margin-bottom:10px;
+/* 混雑状況 */
+.today p:first-of-type{
+    color:var(--main);
+    font-size:22px;
+    font-weight:bold;
+    margin:8px 0 16px;
 }
 
-.today .main-button{
-    width:auto;
-    min-width:220px;
-    padding:12px 20px;
-    margin-top:4px;
-    font-size:15px;
+
+/* 掃除・入浴可能の情報 */
+.today p{
+    color:var(--text);
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:8px;
 }
 
 
 /* 入浴可能時刻 */
-
 #available-time{
+
     display:block;
 
-    width:180px;
-    margin:8px auto 10px;
+    width:140px;
 
-    padding:10px;
+    margin:6px auto 8px;
+
+    padding:6px 8px;
 
     border:1px solid var(--line);
-    border-radius:14px;
+    border-radius:12px;
 
     background:#fffdf8;
 
     color:var(--text);
 
     font-family:"Zen Maru Gothic", sans-serif;
-    font-size:16px;
 
-    text-align:center;
+    font-size:14px;
+
 }
 
 
-/* 掃除状態 */
+/* 設定ボタン */
+.today .main-button{
 
-.today p:nth-of-type(2){
-    color:var(--text);
-    font-size:15px;
-    font-weight:500;
-}
+    width:auto;
 
+    min-width:170px;
 
-/* 入浴可能 */
+    padding:9px 16px;
 
-.today p:nth-of-type(3){
-    color:var(--blue);
-    font-size:15px;
-    font-weight:bold;
+    margin-top:3px;
+
+    border-radius:14px;
+
+    font-size:13px;
+
 }
