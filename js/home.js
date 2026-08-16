@@ -17,14 +17,35 @@ function drawHome(){
 
 </header>
 
-
 <section class="today">
 
     <h2>♨ 本日の湯</h2>
 
+    <!-- 混雑状況 -->
     <p>${state.crowded}</p>
 
+    <!-- 掃除状況 -->
+    <p>
+        🧹 掃除：
+        ${
+            state.bathInfo.cleaned
+            ? "○ 完了"
+            : "× 未完了"
+        }
+    </p>
+
+    <!-- 入浴可能時刻 -->
+    <p>
+        🛁 入浴可能：
+        ${
+            state.bathInfo.availableTime
+            ? state.bathInfo.availableTime + "〜"
+            : "未設定"
+        }
+    </p>
+
 </section>
+
 
 <section class="card">
 
