@@ -55,6 +55,10 @@ const state = {
    notification: {
     enabled: true,
     longBathMinutes: 30
+},
+   bathInfo: {
+    cleaned: false,
+    availableTime: ""
 }
 
 };
