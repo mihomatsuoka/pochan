@@ -88,7 +88,6 @@ function drawHome(){
 
         <div class="person">
 
-            ${state.current.icon}
             ${state.current.name}
 
         </div>
