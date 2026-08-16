@@ -117,13 +117,15 @@ function drawHome(){
 
 </section>
 
-<section class="card">
 
-    <h2>📜 本日の記録</h2>
+ <section class="card">
 
-    ${drawHistory()}
+    <h2>📋 本日の入浴状況</h2>
 
-</section>　
+    ${drawTodayBathStatus()}
+
+</section>
+
 
     ${drawButtons()}
 
@@ -296,5 +298,54 @@ function drawButtons(){
     </div>
 
     `;
+
+}
+
+// ==========================================
+// 本日の入浴状況
+// ==========================================
+
+function drawTodayBathStatus(){
+
+    const today =
+        new Date().toLocaleDateString("ja-JP");
+
+    return family.map(person => {
+
+        // 今日この人が入浴した記録があるか
+        const hasBath =
+            state.records.some(
+                record =>
+                    record.date === today &&
+                    record.name === person.name
+            );
+
+        return `
+
+        <div class="today-bath-person">
+
+            <span class="today-bath-name">
+                ${person.name}
+            </span>
+
+            <span class="${
+                hasBath
+                ? "today-bath-done"
+                : "today-bath-notyet"
+            }">
+
+                ${
+                    hasBath
+                    ? "✓ 入浴済み"
+                    : "未入浴"
+                }
+
+            </span>
+
+        </div>
+
+        `;
+
+    }).join("");
 
 }
