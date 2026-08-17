@@ -183,7 +183,7 @@ function loadData(){
                         "Firebaseにデータがないため初期状態にしました"
                     );
 
-                    updateCrowded();
+                   updateCrowded();
                     //drawHome();
 
                     return;
