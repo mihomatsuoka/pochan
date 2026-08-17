@@ -9,7 +9,7 @@ window.addEventListener("load", async () => {
     loadData();
 
     //通知監視開始
-    startNotificationListener();
+  //  startNotificationListener();
 
     // 混雑状況更新
     updateCrowded();
