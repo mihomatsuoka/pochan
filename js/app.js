@@ -190,7 +190,7 @@ function loadData(){
                 }
 
 
-             checkQUeueNotification();
+             checkQueueNotification();
 // Firebase更新前の自分の順位を保存
 let oldPosition = 0;
 
