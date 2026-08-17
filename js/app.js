@@ -391,23 +391,44 @@ function updateCrowded(){
 
     const count = state.queue.length;
 
-    if(count===0){
+    // 誰かが入浴中
+    if(state.current.status === "入浴中"){
 
-        state.crowded="🟢 空いています";
+        if(count >= 3){
+
+            state.crowded = "🔴 混雑中！";
+
+        }else{
+
+            state.crowded = "🟡 ちょっと待ってね";
+
+        }
 
     }
 
-    else if(count<=2){
-
-        state.crowded="🟡 ちょっと待ってね";
-
-    }
-
+    // 誰も入浴していない
     else{
 
-        state.crowded="🔴 混雑中！";
+        if(count === 0){
+
+            state.crowded = "🟢 空いています";
+
+        }
+
+        else if(count <= 2){
+
+            state.crowded = "🟡 ちょっと待ってね";
+
+        }
+
+        else{
+
+            state.crowded = "🔴 混雑中！";
+
+        }
 
     }
+
 }
 
 /* ==========================================
