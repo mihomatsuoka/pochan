@@ -697,4 +697,41 @@ function setBathAvailableTime(){
 
 }
 
+/* ==========================================
+   入浴開始通知イベント
+========================================== */
+
+function sendBathNotification(name){
+
+    // Firebaseが使えない場合は何もしない
+    if(!window.firebaseDB){
+        return;
+    }
+
+    const notificationRef =
+        window.firebaseRef(
+            window.firebaseDB,
+            "pochan/notification"
+        );
+
+    const notificationData = {
+
+        name: name,
+
+        timestamp: Date.now()
+
+    };
+
+    window.firebaseSet(
+        notificationRef,
+        notificationData
+    );
+
+    console.log(
+        "入浴通知イベントをFirebaseに保存しました",
+        notificationData
+    );
+
+}
+
 
