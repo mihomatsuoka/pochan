@@ -8,6 +8,9 @@ window.addEventListener("load", async () => {
     // データ読み込み
     loadData();
 
+    //通知監視開始
+    startNotificationListener();
+
     // 混雑状況更新
     updateCrowded();
 
