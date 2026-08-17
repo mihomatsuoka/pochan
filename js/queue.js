@@ -256,6 +256,7 @@ function startBath(){
 
     };
 
+    sendBathNotification(next.name);
 
     addHistory(
 
