@@ -696,3 +696,55 @@ function setBathAvailableTime(){
     drawHome();
 
 }
+
+/* ==========================================
+   入浴開始通知チェック
+========================================== */
+
+let previousBathName = "";
+
+function checkBathStartNotification(){
+
+    // 入浴中でなければ終了
+    if(state.current.status !== "入浴中"){
+        return;
+    }
+
+    const currentBathName =
+        state.current.name;
+
+    // 前回と同じ人なら通知しない
+    if(previousBathName === currentBathName){
+        return;
+    }
+
+    // 初回読み込みでは通知しない
+    if(previousBathName === ""){
+        previousBathName =
+            currentBathName;
+
+        return;
+    }
+
+    // 通知が使えない場合
+    if(
+        !("Notification" in window) ||
+        Notification.permission !== "granted"
+    ){
+        previousBathName =
+            currentBathName;
+
+        return;
+    }
+
+    new Notification(
+        "♨️ ぽちゃんからのお知らせ",
+        {
+            body:
+                `${currentBathName}が入浴しました`
+        }
+    );
+
+    previousBathName =
+        currentBathName;
+}
