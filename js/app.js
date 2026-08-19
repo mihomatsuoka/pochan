@@ -189,8 +189,10 @@ function loadData(){
                     return;
                 }
 
-
+            //通常の通知チェック
              checkQueueNotification();
+            // 入浴開始通知
+　　　　　　　 checkBathStartNotification();
 // Firebase更新前の自分の順位を保存
 let oldPosition = 0;
 
@@ -302,6 +304,8 @@ updateCrowded();
 
 // 通常の通知チェック
 checkQueueNotification();
+// 入浴開始通知
+checkBathStartNotification();
 
             }
         );
