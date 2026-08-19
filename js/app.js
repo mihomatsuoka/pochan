@@ -741,13 +741,43 @@ function checkBathStartNotification(){
         return;
     }
 
-    new Notification(
-        "♨️ ぽちゃんからのお知らせ",
-        {
-            body:
-                `${currentBathName}が入浴しました`
-        }
-    );
+// 本日まだ入浴していない家族を取得
+const today =
+    new Date().toLocaleDateString("ja-JP");
+
+const todayBathNames =
+    state.records
+        .filter(record => record.date === today)
+        .map(record => record.name);
+
+const notBathNames =
+    family
+        .map(person => person.name)
+        .filter(name => !todayBathNames.includes(name))
+        .filter(name => name !== currentBathName);
+
+
+// 通知内容
+let notificationBody =
+    `${currentBathName}が入浴しました`;
+
+
+// 未入浴の人がいる場合
+if(notBathNames.length > 0){
+
+    notificationBody +=
+        `。あと入っていないのは${notBathNames.join("・")}です`;
+
+}
+
+
+// 通知
+new Notification(
+    "♨️ ぽちゃんからのお知らせ",
+    {
+        body: notificationBody
+    }
+);
 
    // 本日まだ入浴していない家族を取得
 const today =
