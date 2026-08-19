@@ -711,102 +711,118 @@ function checkBathStartNotification(){
 
     // 入浴中でなければ終了
     if(state.current.status !== "入浴中"){
+
         return;
+
     }
+
 
     const currentBathName =
         state.current.name;
 
+
     // 前回と同じ人なら通知しない
     if(previousBathName === currentBathName){
+
         return;
+
     }
+
 
     // 初回読み込みでは通知しない
     if(previousBathName === ""){
+
         previousBathName =
             currentBathName;
 
         return;
+
     }
+
 
     // 通知が使えない場合
     if(
         !("Notification" in window) ||
         Notification.permission !== "granted"
     ){
+
         previousBathName =
             currentBathName;
 
         return;
+
     }
 
-// 本日まだ入浴していない家族を取得
-const today =
-    new Date().toLocaleDateString("ja-JP");
 
-const todayBathNames =
-    state.records
-        .filter(record => record.date === today)
-        .map(record => record.name);
-
-const notBathNames =
-    family
-        .map(person => person.name)
-        .filter(name => !todayBathNames.includes(name))
-        .filter(name => name !== currentBathName);
+    // 本日の入浴済み状況を取得
+    const todayBathNames =
+        getTodayBathNames();
 
 
-// 通知内容
-let notificationBody =
-    `${currentBathName}が入浴しました`;
+    // 本日まだ入浴していない家族
+    const notBathNames =
+        family
+            .map(
+                person => person.name
+            )
+            .filter(
+                name =>
+                    !todayBathNames.includes(name)
+            )
+            .filter(
+                name =>
+                    name !== currentBathName
+            );
 
 
-// 未入浴の人がいる場合
-if(notBathNames.length > 0){
-
-    notificationBody +=
-        `。あと入っていないのは${notBathNames.join("・")}です`;
-
-}
+    // 通知内容
+    let notificationBody =
+        `${currentBathName}が入浴しました`;
 
 
-// 通知
-new Notification(
-    "♨️ ぽちゃんからのお知らせ",
-    {
-        body: notificationBody
+    // 未入浴の人がいる場合
+    if(notBathNames.length > 0){
+
+        notificationBody +=
+            `。あと入っていないのは${notBathNames.join("・")}です`;
+
     }
-);
 
-   // 本日まだ入浴していない家族を取得
-const today =
-    new Date().toLocaleDateString("ja-JP");
 
-const todayBathNames =
-    state.records
-        .filter(record => record.date === today)
-        .map(record => record.name);
-
-const notBathNames =
-    family
-        .map(person => person.name)
-        .filter(name => !todayBathNames.includes(name))
-        .filter(name => name !== currentBathName);
-
-// 未入浴の人がいる場合
-if(notBathNames.length > 0){
-
+    // 通知
     new Notification(
-        "♨️ 本日の入浴状況",
+        "♨️ ぽちゃんからのお知らせ",
         {
-            body:
-                `あと入っていないのは${notBathNames.join("・")}です`
+            body: notificationBody
         }
     );
 
-}
 
+    // 今回の入浴者を保存
     previousBathName =
         currentBathName;
+
+}
+
+
+/* ==========================================
+   本日の入浴済み判定
+========================================== */
+
+function getTodayBathNames(){
+
+    const today =
+        new Date().toLocaleDateString("ja-JP");
+
+
+    return state.records
+        .filter(
+            record =>
+                record.date === today
+        )
+        .map(
+            record =>
+                record.name
+        );
+
 }
