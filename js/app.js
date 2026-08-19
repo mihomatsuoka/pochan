@@ -749,6 +749,34 @@ function checkBathStartNotification(){
         }
     );
 
+   // 本日まだ入浴していない家族を取得
+const today =
+    new Date().toLocaleDateString("ja-JP");
+
+const todayBathNames =
+    state.records
+        .filter(record => record.date === today)
+        .map(record => record.name);
+
+const notBathNames =
+    family
+        .map(person => person.name)
+        .filter(name => !todayBathNames.includes(name))
+        .filter(name => name !== currentBathName);
+
+// 未入浴の人がいる場合
+if(notBathNames.length > 0){
+
+    new Notification(
+        "♨️ 本日の入浴状況",
+        {
+            body:
+                `あと入っていないのは${notBathNames.join("・")}です`
+        }
+    );
+
+}
+
     previousBathName =
         currentBathName;
 }
