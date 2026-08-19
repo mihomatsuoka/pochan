@@ -669,6 +669,11 @@ function checkBathInfoDate(){
 
 checkBathInfoDate();
 
+setInterval(
+    checkBathInfoDate,
+    60000
+);
+
 /* ==========================================
    入浴可能時刻設定
 ========================================== */
