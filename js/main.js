@@ -1,6 +1,34 @@
 window.addEventListener("load", async () => {
 
+   // Service Workerを登録
+    if ("serviceWorker" in navigator) {
+
+        try {
+
+            const registration =
+                await navigator.serviceWorker.register(
+                    "./service-worker.js"
+                );
+
+            console.log(
+                "Service Worker 登録OK",
+                registration
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Service Worker 登録失敗:",
+                error
+            );
+
+        }
+
+    }
+
+
     // Firebaseの準備を待つ
+    
     if (window.firebaseReady) {
         await window.firebaseReady;
     }
