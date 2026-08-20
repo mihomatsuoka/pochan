@@ -311,8 +311,8 @@ function drawButtons(){
 function drawTodayBathStatus(){
 
     const today =
-        new Date().toLocaleDateString("ja-JP");
-
+　　　　　　　　getTodaySrting();
+       
     return family.map(person => {
 
         // 今日この人が入浴した記録があるか
