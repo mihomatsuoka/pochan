@@ -471,6 +471,16 @@ function testNotification(){
 
     }
 
+     console.log(
+        "通知テスト",
+        "Notification:",
+        "Notification" in window,
+        "permission:",
+        Notification.permission
+    );
+
+   
+
     if(Notification.permission !== "granted"){
 
         alert("先に「通知を許可する」を押してください。");
