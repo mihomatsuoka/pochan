@@ -489,12 +489,19 @@ function testNotification(){
 
     }
 
-    new Notification(
-        "♨ ぽちゃん",
-        {
-            body: "お風呂の通知テストです！"
-        }
-    );
+ navigator.serviceWorker.ready.then(
+    registration => {
+
+        registration.showNotification(
+            "♨ ぽちゃん",
+            {
+                body:
+                    "お風呂の通知テストです！"
+            }
+        );
+
+    }
+);
 
 }
 
