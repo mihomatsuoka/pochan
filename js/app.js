@@ -325,9 +325,9 @@ updateCrowded();
 
 
 // 通常の通知チェック
-checkQueueNotification();
+//checkQueueNotification();
 // 入浴開始通知
-checkBathStartNotification();
+//checkBathStartNotification();
 
             }
         );
