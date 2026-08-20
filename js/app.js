@@ -230,6 +230,28 @@ if(
     };
 
 }
+
+if(
+    !state.notification ||
+    typeof state.notification !== "object"
+){
+
+    state.notification = {
+        enabled: true,
+        longBathMinutes: 30
+    };
+
+}
+
+if(
+    state.notification.longBathMinutes === undefined
+){
+
+    state.notification.longBathMinutes = 30;
+
+}
+
+
                
 console.log(
     "本日の湯情報:",
