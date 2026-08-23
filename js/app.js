@@ -948,3 +948,94 @@ function getTodayBathNames(){
         );
 
 }
+
+/* ==========================================
+   FCMトークン取得
+========================================== */
+
+async function setupFCM(){
+
+    console.log("★ FCMトークン取得開始");
+
+    // 通知機能が使えない場合
+    if(!("Notification" in window)){
+
+        console.log("★ この端末は通知に対応していません");
+
+        return;
+
+    }
+
+    // 通知許可を確認
+    const permission =
+        await Notification.requestPermission();
+
+    console.log(
+        "★ 通知許可:",
+        permission
+    );
+
+    if(permission !== "granted"){
+
+        console.log("★ 通知が許可されていません");
+
+        return;
+
+    }
+
+    // FCMトークンを取得
+    try{
+
+        const token =
+            await window.firebaseGetToken(
+                window.firebaseMessaging,
+                {
+                    vapidKey:
+                        window.firebaseVapidKey
+                }
+            );
+
+        console.log(
+            "★ FCMトークン:",
+            token
+        );
+
+        if(!token){
+
+            console.log(
+                "★ FCMトークンを取得できませんでした"
+            );
+
+            return;
+
+        }
+
+        // Firebaseに保存
+        const tokenRef =
+            window.firebaseRef(
+                window.firebaseDB,
+                "pochan/tokens/" + currentUser
+            );
+
+        await window.firebaseSet(
+            tokenRef,
+            token
+        );
+
+        console.log(
+            "★ FCMトークンをFirebaseに保存しました"
+        );
+
+    }catch(error){
+
+        console.error(
+            "★ FCMトークン取得エラー:",
+            error
+        );
+
+    }
+
+}
+
+setupFCM();
+
