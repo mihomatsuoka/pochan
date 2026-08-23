@@ -463,30 +463,33 @@ function requestNotificationPermission(){
 
 function testNotification(){
 
-    // 通知API確認
     if(!("Notification" in window)){
 
-        alert("この端末では通知を利用できません。");
+        alert(
+            "この端末では通知を利用できません。"
+        );
 
         return;
 
     }
 
 
-    // 通知許可確認
     if(Notification.permission !== "granted"){
 
-        alert("先に通知を許可してください。");
+        alert(
+            "通知が許可されていません。"
+        );
 
         return;
 
     }
 
 
-    // Service Worker確認
     if(!("serviceWorker" in navigator)){
 
-        alert("Service Workerが利用できません。");
+        alert(
+            "Service Workerが利用できません。"
+        );
 
         return;
 
@@ -497,27 +500,25 @@ function testNotification(){
         .then(registration => {
 
             console.log(
-                "Service Worker準備OK:",
+                "Service Worker準備OK",
                 registration
             );
 
 
-            registration.showNotification(
+            return registration.showNotification(
                 "♨️ ぽちゃん",
                 {
                     body:
-                        "お風呂の通知テストです！",
-
-                    icon:
-                        "./icon-192.png",
-
-                    badge:
-                        "./icon-192.png"
+                        "お風呂の通知テストです！"
                 }
             );
 
+        })
+        .then(() => {
 
-            alert("テスト通知を送信しました。");
+            alert(
+                "テスト通知を送信しました！"
+            );
 
         })
         .catch(error => {
@@ -534,7 +535,6 @@ function testNotification(){
         });
 
 }
-
    
 /* ==========================================
    通知ON / OFF
