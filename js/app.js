@@ -764,74 +764,116 @@ function setBathAvailableTime(){
    入浴開始通知チェック
 ========================================== */
 
-let previousBathName = "";
-
 function checkBathStartNotification(){
 
-
-console.log(
-    "★ 入浴開始通知チェック実行",
-    "現在:",
-    state.current.name,
-    "前回:",
-    previousBathName
-);
-
-    // 入浴中でなければ終了
-    if(state.current.status !== "入浴中"){
-
-        return;
-
-    }
+    console.log(
+        "★ 入浴開始通知チェック実行",
+        "現在:",
+        state.current.name,
+        "前回:",
+        previousBathName
+    );
 
 
+    // 現在の入浴者
     const currentBathName =
         state.current.name;
 
 
-    // 前回と同じ人なら通知しない
-    if(previousBathName === currentBathName){
+    // ==========================================
+    // 前回と今回が同じなら何もしない
+    // ==========================================
+
+    if(
+        previousBathName === currentBathName
+    ){
 
         return;
 
     }
 
 
-    // 初回読み込みでは通知しない
-    if(previousBathName === ""){
+    // ==========================================
+    // 今回の状態を保存
+    // ==========================================
 
-        previousBathName =
-            currentBathName;
+    const oldBathName =
+        previousBathName;
+
+    previousBathName =
+        currentBathName;
+
+
+    console.log(
+        "★ 入浴者が変化",
+        "前:",
+        oldBathName,
+        "後:",
+        currentBathName
+    );
+
+
+    // ==========================================
+    // 「誰もいません」→「誰かが入浴中」
+    // の変化だけを通知対象にする
+    // ==========================================
+
+    if(
+        oldBathName !== "誰もいません" ||
+        state.current.status !== "入浴中"
+    ){
 
         return;
 
     }
 
 
-    // 通知が使えない場合
+    // ==========================================
+    // 通知状態チェック
+    // ==========================================
+
+    console.log(
+        "★ 通知状態チェック",
+        "Notification:",
+        "Notification" in window,
+        "permission:",
+        "Notification" in window
+            ? Notification.permission
+            : "未対応"
+    );
+
+
     if(
         !("Notification" in window) ||
         Notification.permission !== "granted"
     ){
 
-        previousBathName =
-            currentBathName;
+        console.log(
+            "★ 通知できません"
+        );
 
         return;
 
     }
 
 
-    // 本日の入浴済み状況を取得
+    // ==========================================
+    // 本日の入浴済み状況
+    // ==========================================
+
     const todayBathNames =
         getTodayBathNames();
 
 
+    // ==========================================
     // 本日まだ入浴していない家族
+    // ==========================================
+
     const notBathNames =
         family
             .map(
-                person => person.name
+                person =>
+                    person.name
             )
             .filter(
                 name =>
@@ -843,12 +885,14 @@ console.log(
             );
 
 
+    // ==========================================
     // 通知内容
+    // ==========================================
+
     let notificationBody =
         `${currentBathName}が入浴しました`;
 
 
-    // 未入浴の人がいる場合
     if(notBathNames.length > 0){
 
         notificationBody +=
@@ -857,21 +901,25 @@ console.log(
     }
 
 
-    // 通知
-    new Notification(
-        "♨️ ぽちゃんからのお知らせ",
-        {
-            body: notificationBody
-        }
+    console.log(
+        "★ 入浴開始通知を送信:",
+        notificationBody
     );
 
 
-    // 今回の入浴者を保存
-    previousBathName =
-        currentBathName;
+    // ==========================================
+    // 通知
+    // ==========================================
+
+    new Notification(
+        "♨️ ぽちゃんからのお知らせ",
+        {
+            body:
+                notificationBody
+        }
+    );
 
 }
-
 
 /* ==========================================
    本日の入浴済み判定
