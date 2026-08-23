@@ -954,17 +954,21 @@ function getTodayBathNames(){
 ========================================== */
 
 window.setupFCM = async function(){
-   
+
     console.log("★ FCMトークン取得開始");
+
 
     // 通知機能が使えない場合
     if(!("Notification" in window)){
 
-        console.log("★ この端末は通知に対応していません");
+        console.log(
+            "★ この端末は通知に対応していません"
+        );
 
         return;
 
     }
+
 
     // 通知許可を確認
     const permission =
@@ -975,15 +979,52 @@ window.setupFCM = async function(){
         permission
     );
 
+
     if(permission !== "granted"){
 
-        console.log("★ 通知が許可されていません");
+        console.log(
+            "★ 通知が許可されていません"
+        );
 
         return;
 
     }
 
+
+    // ==========================================
+    // FCM用Service Workerを登録
+    // ==========================================
+
+    let registration;
+
+    try{
+
+        registration =
+            await navigator.serviceWorker.register(
+                "./firebase-messaging-sw.js"
+            );
+
+        console.log(
+            "★ FCM用Service Worker登録OK",
+            registration
+        );
+
+    }catch(error){
+
+        console.error(
+            "★ FCM用Service Worker登録エラー:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    // ==========================================
     // FCMトークンを取得
+    // ==========================================
+
     try{
 
         const token =
@@ -991,14 +1032,19 @@ window.setupFCM = async function(){
                 window.firebaseMessaging,
                 {
                     vapidKey:
-                        window.firebaseVapidKey
+                        window.firebaseVapidKey,
+
+                    serviceWorkerRegistration:
+                        registration
                 }
             );
+
 
         console.log(
             "★ FCMトークン:",
             token
         );
+
 
         if(!token){
 
@@ -1010,21 +1056,28 @@ window.setupFCM = async function(){
 
         }
 
+
+        // ==========================================
         // Firebaseに保存
+        // ==========================================
+
         const tokenRef =
             window.firebaseRef(
                 window.firebaseDB,
                 "pochan/tokens/" + currentUser
             );
 
+
         await window.firebaseSet(
             tokenRef,
             token
         );
 
+
         console.log(
             "★ FCMトークンをFirebaseに保存しました"
         );
+
 
     }catch(error){
 
@@ -1036,4 +1089,3 @@ window.setupFCM = async function(){
     }
 
 }
-
