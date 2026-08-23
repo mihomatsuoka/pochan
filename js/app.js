@@ -768,9 +768,7 @@ let previousBathName = "";
 
 function checkBathStartNotification(){
 
-   function checkBathStartNotification(){
 
-```
 console.log(
     "★ 入浴開始通知チェック実行",
     "現在:",
@@ -778,15 +776,6 @@ console.log(
     "前回:",
     previousBathName
 );
-
-// 入浴中でなければ終了
-if(state.current.status !== "入浴中"){
-
-    return;
-
-}
-```
-
 
     // 入浴中でなければ終了
     if(state.current.status !== "入浴中"){
