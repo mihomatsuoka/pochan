@@ -217,6 +217,16 @@ Object.assign(
     state,
     firebaseData
 );
+
+console.log(
+    "Firebase更新後の現在:",
+    state.current
+);
+
+console.log(
+    "Firebase更新後の待機列:",
+    state.queue
+);
                
 // 本日の湯の情報を確認
 if(
