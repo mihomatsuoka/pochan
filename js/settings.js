@@ -429,30 +429,96 @@ function saveIconInput(){
    通知
 ========================================== */
 
-function requestNotificationPermission(){
+/* ==========================================
+   通知許可
+========================================== */
 
+async function requestNotificationPermission(){
+
+    console.log("通知許可ボタンが押されました");
+
+    // 通知機能があるか確認
     if(!("Notification" in window)){
 
-        alert("この端末では通知を利用できません。");
+        alert(
+            "この端末では通知を利用できません。"
+        );
+
+        console.log(
+            "Notification API がありません"
+        );
 
         return;
 
     }
 
-    Notification.requestPermission()
-        .then(permission => {
 
-            if(permission === "granted"){
+    console.log(
+        "現在の通知許可状態:",
+        Notification.permission
+    );
 
-                alert("通知を許可しました！");
 
-            }else{
+    // すでに許可されている
+    if(Notification.permission === "granted"){
 
-                alert("通知が許可されていません。");
+        alert(
+            "通知はすでに許可されています。"
+        );
 
-            }
+        console.log(
+            "通知はすでに許可されています"
+        );
 
-        });
+        return;
+
+    }
+
+
+    // 許可をリクエスト
+    try{
+
+        const permission =
+            await Notification.requestPermission();
+
+        console.log(
+            "通知許可の結果:",
+            permission
+        );
+
+
+        if(permission === "granted"){
+
+            alert(
+                "通知を許可しました！"
+            );
+
+        }else if(permission === "denied"){
+
+            alert(
+                "通知が拒否されています。iPhoneの設定から通知を許可してください。"
+            );
+
+        }else{
+
+            alert(
+                "通知の許可が選択されませんでした。"
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "通知許可エラー:",
+            error
+        );
+
+        alert(
+            "通知の許可に失敗しました。"
+        );
+
+    }
 
 }
 
@@ -461,23 +527,40 @@ function requestNotificationPermission(){
    テスト通知
 ========================================== */
 
-function testNotification(){
+async function testNotification(){
 
+    console.log(
+        "テスト通知ボタンが押されました"
+    );
+
+
+    // Notification API確認
     if(!("Notification" in window)){
 
         alert(
             "この端末では通知を利用できません。"
         );
 
+        console.log(
+            "Notification API がありません"
+        );
+
         return;
 
     }
 
 
+    console.log(
+        "テスト通知時の許可状態:",
+        Notification.permission
+    );
+
+
+    // まだ許可されていない
     if(Notification.permission !== "granted"){
 
         alert(
-            "通知が許可されていません。"
+            "先に通知を許可してください。"
         );
 
         return;
@@ -485,27 +568,11 @@ function testNotification(){
     }
 
 
-    if(!("serviceWorker" in navigator)){
+    // テスト通知
+    try{
 
-        alert(
-            "Service Workerが利用できません。"
-        );
-
-        return;
-
-    }
-
-
-    navigator.serviceWorker.ready
-        .then(registration => {
-
-            console.log(
-                "Service Worker準備OK",
-                registration
-            );
-
-
-            return registration.showNotification(
+        const notification =
+            new Notification(
                 "♨️ ぽちゃん",
                 {
                     body:
@@ -513,26 +580,34 @@ function testNotification(){
                 }
             );
 
-        })
-        .then(() => {
 
-            alert(
-                "テスト通知を送信しました！"
+        console.log(
+            "テスト通知を送信しました",
+            notification
+        );
+
+
+        notification.onclick = () => {
+
+            console.log(
+                "テスト通知がタップされました"
             );
 
-        })
-        .catch(error => {
+        };
 
-            console.error(
-                "テスト通知エラー:",
-                error
-            );
 
-            alert(
-                "テスト通知に失敗しました。"
-            );
+    }catch(error){
 
-        });
+        console.error(
+            "テスト通知エラー:",
+            error
+        );
+
+        alert(
+            "テスト通知の送信に失敗しました。"
+        );
+
+    }
 
 }
    
