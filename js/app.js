@@ -953,8 +953,8 @@ function getTodayBathNames(){
    FCMトークン取得
 ========================================== */
 
-async function setupFCM(){
-
+window.setupFCM = async function(){
+   
     console.log("★ FCMトークン取得開始");
 
     // 通知機能が使えない場合
@@ -1036,6 +1036,4 @@ async function setupFCM(){
     }
 
 }
-
-setupFCM();
 
