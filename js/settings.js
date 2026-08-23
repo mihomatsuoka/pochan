@@ -463,6 +463,7 @@ function requestNotificationPermission(){
 
 function testNotification(){
 
+    // 通知API確認
     if(!("Notification" in window)){
 
         alert("この端末では通知を利用できません。");
@@ -471,40 +472,70 @@ function testNotification(){
 
     }
 
-     console.log(
-        "通知テスト",
-        "Notification:",
-        "Notification" in window,
-        "permission:",
-        Notification.permission
-    );
 
-   
-
+    // 通知許可確認
     if(Notification.permission !== "granted"){
 
-        alert("先に「通知を許可する」を押してください。");
+        alert("先に通知を許可してください。");
 
         return;
 
     }
 
- navigator.serviceWorker.ready.then(
-    registration => {
 
-        registration.showNotification(
-            "♨ ぽちゃん",
-            {
-                body:
-                    "お風呂の通知テストです！"
-            }
-        );
+    // Service Worker確認
+    if(!("serviceWorker" in navigator)){
+
+        alert("Service Workerが利用できません。");
+
+        return;
 
     }
-);
+
+
+    navigator.serviceWorker.ready
+        .then(registration => {
+
+            console.log(
+                "Service Worker準備OK:",
+                registration
+            );
+
+
+            registration.showNotification(
+                "♨️ ぽちゃん",
+                {
+                    body:
+                        "お風呂の通知テストです！",
+
+                    icon:
+                        "./icon-192.png",
+
+                    badge:
+                        "./icon-192.png"
+                }
+            );
+
+
+            alert("テスト通知を送信しました。");
+
+        })
+        .catch(error => {
+
+            console.error(
+                "テスト通知エラー:",
+                error
+            );
+
+            alert(
+                "テスト通知に失敗しました。"
+            );
+
+        });
 
 }
 
+   
 /* ==========================================
    通知ON / OFF
 ========================================== */
