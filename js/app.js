@@ -329,6 +329,12 @@ updateCrowded();
 // 入浴開始通知
 　checkBathStartNotification();
 
+           if(currentPage === "home"){
+
+    drawHome();
+
+}
+
             }
         );
 
