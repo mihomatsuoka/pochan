@@ -97,7 +97,10 @@ window.firebaseSet = set;
 window.firebaseOnValue = onValue;
 
 
+// ==========================================
 // FCM用
+// ==========================================
+
 window.firebaseMessaging = messaging;
 
 window.firebaseGetToken = getToken;
@@ -114,16 +117,26 @@ console.log(
 
 console.log(
     "FCM準備OK"
+);
 
-    setTimeout(() => {
 
-    if(typeof window.setupFCM === "function"){
+// ==========================================
+// FCM開始
+// Firebaseの準備が完了してから実行
+// ==========================================
 
-        console.log("★ Firebase準備完了 → FCM開始");
+setTimeout(() => {
+
+    if(
+        typeof window.setupFCM === "function"
+    ){
+
+        console.log(
+            "★ Firebase準備完了 → FCM開始"
+        );
 
         window.setupFCM();
 
     }
 
 }, 500);
-);
