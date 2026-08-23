@@ -522,6 +522,68 @@ async function requestNotificationPermission(){
 
 }
 
+/* ==========================================
+   通知送信共通処理
+========================================== */
+
+function sendPochanNotification(title, body){
+
+    console.log(
+        "ぽちゃん通知送信:",
+        title,
+        body
+    );
+
+    if(!("Notification" in window)){
+
+        console.log(
+            "Notification API がありません"
+        );
+
+        return false;
+
+    }
+
+    if(Notification.permission !== "granted"){
+
+        console.log(
+            "通知許可がありません:",
+            Notification.permission
+        );
+
+        return false;
+
+    }
+
+    try{
+
+        const notification =
+            new Notification(
+                title,
+                {
+                    body: body
+                }
+            );
+
+        console.log(
+            "ぽちゃん通知を送信しました",
+            notification
+        );
+
+        return true;
+
+    }catch(error){
+
+        console.error(
+            "ぽちゃん通知エラー:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
 
 /* ==========================================
    テスト通知
