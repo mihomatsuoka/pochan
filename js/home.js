@@ -311,7 +311,7 @@ function drawButtons(){
 function drawTodayBathStatus(){
 
     const today =
-　　　　　　　　getTodaySrting();
+　　　　　　　　getTodayString();
        
     return family.map(person => {
 
